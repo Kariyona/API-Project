@@ -55,6 +55,34 @@ const validateSpotCreation = [
     handleValidationErrors,
 ];
 
+router.put('/:spotId',[requireAuth, validateSpotCreation], async (req, res) => {
+    const { user } = req
+    // const spotId = req.params.spotId
+    let spot = await Spot.findByPk(req.params.spotId);
+
+    if (!spot) {
+        return res.status(404).json({
+            message: "Spot couldn't be found"
+        });
+    }
+    if (user.id === spot.ownerId) {
+        const { address, city, state, country, lat, lng, name, description, price } = req.body
+        const updatedSpot = await spot.update({
+            address,
+            city,
+            country,
+            lat,
+            lng,
+            name,
+            description,
+            price
+        })
+        res.json(updatedSpot)
+    } else {
+        res.status(403).json({ message: "Forbidden" });
+    }
+})
+
 router.get('/', async (req, res) => {
     let spotsList = [];
     const spots = await Spot.findAll({
@@ -119,7 +147,6 @@ router.post('/', [requireAuth, validateSpotCreation], async (req, res) => {
         })
         res.status(201).json(newSpot)
     }
-
 })
 
 module.exports = router;
