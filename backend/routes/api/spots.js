@@ -7,6 +7,54 @@ const { handleValidationErrors } = require("../../utils/validation");
 
 const router = express.Router();
 
+// const validateSignup = [
+//     check("email")
+//       .exists({ checkFalsy: true })
+//       .isEmail()
+//       .withMessage("Please provide a valid email."),
+//     check("username")
+//       .exists({ checkFalsy: true })
+//       .isLength({ min: 4 })
+//       .withMessage("Please provide a username with at least 4 characters."),
+//     check("username").not().isEmail().withMessage("Username cannot be an email."),
+//     check("password")
+//       .exists({ checkFalsy: true })
+//       .isLength({ min: 6 })
+//       .withMessage("Password must be 6 characters or more."),
+//     handleValidationErrors,
+// ];
+
+const validateSpotCreation = [
+    check("address")
+        .exists({ checkFalsy: true })
+        .withMessage('Street address is required'),
+    check("city")
+        .exists({ checkFalsy: true })
+        .withMessage('City is required'),
+    check("state")
+        .exists({ checkFalsy: true })
+        .withMessage('State is required'),
+    check("country")
+        .exists({ checkFalsy: true })
+        .withMessage('Country is required'),
+    check("lat")
+        .isFloat({ min: -90, max: 90 })
+        .withMessage('Latitude is not valid'),
+    check("lng")
+        .isFloat({ min: -180, max: 180 })
+        .withMessage('Longitude is not valid'),
+    check("name")
+        .exists({ max: 49 })
+        .withMessage('Name must be less than 50 characters'),
+    check("description")
+        .exists({ checkFalsy: true })
+        .withMessage("Description is required"),
+    check("price")
+        .exists({ checkFalsy: true })
+        .withMessage("Price per day is required"),
+    handleValidationErrors,
+];
+
 router.get('/', async (req, res) => {
     let spotsList = [];
     const spots = await Spot.findAll({
@@ -60,4 +108,22 @@ router.get('/', async (req, res) => {
     });
 })
 
+router.post('/', [requireAuth, validateSpotCreation], async (req, res) => {
+    const { user } = req
+    if (user) {
+        const { address, city, state, country, lat, lng, name, description, price } = req.body;
+
+        const newSpot = await Spot.create({
+            ownerId : user.id,
+            address, city, state, country, lat, lng, name, description, price
+        })
+        res.status(201).json(newSpot)
+    }
+
+})
+
 module.exports = router;
+// if requires proper authorization
+// const spot = await Spot.findByPk(req.params.spotId)
+// if (user) --> if (user.id === spot.ownerId)
+// else res.status(403).json({ message: "Forbidden" });
