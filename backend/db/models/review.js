@@ -21,8 +21,8 @@ module.exports = (sequelize, DataTypes) => {
     }
   }
   Review.init({
-    spotId: DataTypes.INTEGER,
     userId: DataTypes.INTEGER,
+    spotId: DataTypes.INTEGER,
     review: DataTypes.STRING,
     stars: DataTypes.INTEGER
   }, {
@@ -31,4 +31,3 @@ module.exports = (sequelize, DataTypes) => {
   });
   return Review;
 };
-

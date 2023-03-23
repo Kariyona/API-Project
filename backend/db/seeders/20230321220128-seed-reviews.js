@@ -20,20 +20,20 @@ module.exports = {
     */
    await queryInterface.bulkInsert(options, [
     {
-      spotId: 1,
       userId: 1,
+      spotId: 1,
       review: 'This movie suckz',
       stars: 1
     },
     {
-      spotId: 2,
       userId: 2,
+      spotId: 2,
       review: 'This movie is amazing!',
       stars: 5
     },
     {
-      spotId: 3,
       userId: 3,
+      spotId: 3,
       review: 'This movie was okay',
       stars: 3
     }
