@@ -51,6 +51,37 @@ const validateSpotCreation = [
   handleValidationErrors,
 ];
 
+// Add an Image to a Spot based on the Spot's id
+router.post("/:spotId/images", [requireAuth], async (req, res) => {
+  const { user } = req;
+  // const spot = await Spot.scope(['defaultScope']).findByPk(req.params.spotId);
+  const spot = await Spot.findByPk(req.params.spotId);
+  // console.log(spot);
+
+  if (!spot) {
+    return res.status(404).json({ message: "Spot couldn't be found" });
+  }
+
+  if (user.id !== spot.ownerId) {
+    return res.status(403).json({ message: "Forbidden" });
+  }
+
+  const { url, preview } = req.body;
+  // instance of the model
+  const addImage = await SpotImage.create({
+    spotId: spot.id,
+    url,
+    preview,
+  });
+
+  const newImage = addImage.toJSON() //
+
+  delete newImage.spotId
+  delete newImage.createdAt
+  delete newImage.updatedAt
+
+  return res.status(200).json(newImage);
+});
 
 // Get all Spots owned by the Current User
 router.get("/current", [requireAuth], async (req, res) => {
@@ -87,12 +118,12 @@ router.get("/current", [requireAuth], async (req, res) => {
       const ratingNumber = parseFloat(avgRating);
       // spot.avgRating = ratingNumber;
 
-      let previewImage = '';
+      let previewImage = "";
       spot.SpotImages.forEach((image) => {
         if (image.preview) {
           previewImage = image.url;
         }
-      })
+      });
 
       // spot.SpotImages.forEach((image) => {
       //   spot.previewImage = image.url;
@@ -117,8 +148,8 @@ router.get("/current", [requireAuth], async (req, res) => {
         createdAt: spot.createdAt,
         updatedAt: spot.updatedAt,
         avgRating: ratingNumber,
-        previewImage: previewImage
-      }
+        previewImage: previewImage,
+      };
 
       spotsList.push(spotObjectResponse);
       // delete spot.Reviews;
@@ -129,7 +160,6 @@ router.get("/current", [requireAuth], async (req, res) => {
     ["Spots"]: spotsList,
   });
 });
-
 
 // Delete a Spot
 router.delete("/:spotId", [requireAuth], async (req, res) => {
