@@ -51,6 +51,78 @@ const validateSpotCreation = [
   handleValidationErrors,
 ];
 
+// Get details for a Spot from an id
+// Turn the object into a POJO w/ toJSON then reassign the value to a key of owner
+router.get("/:spotId", async (req, res) => {
+  let spot = await Spot.findByPk(req.params.spotId, {
+    include: [
+      {
+        model: SpotImage,
+        as: "SpotImages",
+        attributes: ["id", "url", "preview"],
+      },
+      {
+        model: User,
+        attributes: ["id", "firstName", "lastName"],
+      },
+      {
+        model: Review,
+      },
+    ],
+  });
+
+  if (!spot) {
+    res.status(404).json({
+      message: "Spot couldn't be found",
+    });
+  } else {
+    // const spotDetails = spot.toJSON();
+    // spotDetails.Owner = spotDetails.User;
+
+    // console.log(spot);
+    spot = spot.toJSON();
+    spot.Owner = spot.User;
+    // console.log(spot);
+
+    let sum = 0;
+    let count = 0;
+
+    spot.Reviews.forEach((review) => {
+      sum += review.stars;
+      count++;
+    });
+
+    spot.numReviews = count;
+    spot.avgStarRating = (sum / count).toFixed(1);
+    const ratingNumber = parseFloat(spot.avgStarRating);
+    spot.avgStarRating = ratingNumber;
+
+    delete spot.User;
+    delete spot.Reviews;
+
+    const spotDetailsInOrder = {
+      id: spot.id,
+      ownerId: spot.ownerId,
+      address: spot.address,
+      city: spot.city,
+      state: spot.state,
+      country: spot.country,
+      lat: spot.lat,
+      lng: spot.lng,
+      name: spot.name,
+      desciption: spot.description,
+      price: spot.price,
+      createdAt: spot.createdAt,
+      updatedAt: spot.updatedAt,
+      numReviews: spot.numReviews,
+      avgStarRating: spot.avgStarRating,
+      SpotImages: spot.SpotImages,
+      Owner: spot.Owner
+    }
+    res.status(200).json(spotDetailsInOrder);
+  }
+});
+
 // Add an Image to a Spot based on the Spot's id
 router.post("/:spotId/images", [requireAuth], async (req, res) => {
   const { user } = req;
@@ -74,11 +146,11 @@ router.post("/:spotId/images", [requireAuth], async (req, res) => {
     preview,
   });
 
-  const newImage = addImage.toJSON() //
+  const newImage = addImage.toJSON(); //
 
-  delete newImage.spotId
-  delete newImage.createdAt
-  delete newImage.updatedAt
+  delete newImage.spotId;
+  delete newImage.createdAt;
+  delete newImage.updatedAt;
 
   return res.status(200).json(newImage);
 });
@@ -324,3 +396,29 @@ module.exports = router;
 // const spot = await Spot.findByPk(req.params.spotId)
 // if (user) --> if (user.id === spot.ownerId)
 // else res.status(403).json({ message: "Forbidden" });
+
+// get details of spot by id rough draft using alec's video
+// const spotObjects = []
+// for (let i = 0; i < games.length; i++) {
+//   const spots = spot[i]
+//   spotObjects.push(spots.toJSON())
+// }
+
+// for (let i = 0; i < spotObjects.length; i++) {
+//   const spots = spotObjects[i];
+//   if (spots)
+// }
+// console.log(spotObjects);
+// res.json(spot)
+// let reviewData = await Review.findOne({
+//   where: {
+//     spotId: Spot.id
+//   },
+//   attributes: {
+//     include: [
+//       [sequelize.fn('AVG', sequelize.col('stars')), 'avgRating']
+//     ]
+//   }
+// })
+// spot.avgRating = reviewData.toJSON().avgRating
+// console.log(spot.avgRating)
