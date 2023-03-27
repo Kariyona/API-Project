@@ -16,19 +16,22 @@ const router = express.Router();
 
 // DELETE AN EXISTING IMAGE FOR A REVIEW!!!
 router.delete("/:imageId", [requireAuth], async (req, res) => {
-  const reviewImage = await ReviewImage.findOne({
-    where: {
-      id: req.params.imageId,
-    },
-    include: [
-      {
-        model: Review,
-        where: {
-          userId: req.user.id,
-        },
-      },
-    ],
-  });
+
+  const reviewImage = await ReviewImage.findByPk(req.params.imageId)
+
+  // const reviewImage = await ReviewImage.findOne({
+  //   where: {
+  //     id: req.params.imageId,
+  //   },
+  //   include: [
+  //     {
+  //       model: Review,
+  //       where: {
+  //         userId: req.user.id,
+  //       },
+  //     },
+  //   ],
+  // });
 
   if (!reviewImage) {
     return res.status(404).json({
@@ -36,7 +39,13 @@ router.delete("/:imageId", [requireAuth], async (req, res) => {
     });
   }
 
-  if (reviewImage.review.userId !== req.user.id) {
+  const review = await Review.findOne({
+    where: {
+      id: reviewImage.reviewId
+    }
+  })
+
+  if (review.userId !== req.user.id) {
     return res.status(403).json({
       message: "Forbidden"
     })

@@ -17,28 +17,36 @@ const router = express.Router();
 // DELETE AN EXISTING IMAGE FOR A SPOT!!!
 router.delete("/:imageId", [requireAuth], async (req, res) => {
 
-  const spotImage = await SpotImage.findOne({
-    where: { id: req.params.imageId },
-    include: [
-      {
-        model: Spot,
-        where: {
-          ownerId: req.user.id,
-        },
-      },
-    ],
-  });
+  const spotImage = await SpotImage.findByPk(req.params.imageId)
 
-  if (spotImage.spot.ownerId !== req.user.id) {
-    return res.status(403).json({
-      message: "Forbidden"
-    })
-  }
+  // const spotImage = await SpotImage.findOne({
+  //   where: { id: req.params.imageId },
+  //   include: [
+  //     {
+  //       model: Spot,
+  //       where: {
+  //         ownerId: req.user.id,
+  //       },
+  //     },
+  //   ],
+  // });
 
   if (!spotImage) {
     return res.status(404).json({
       message: "Spot Image couldn't be found",
     });
+  }
+
+  const spot = await Spot.findOne({
+    where: {
+      id: spotImage.spotId
+    }
+  })
+
+  if (spot.ownerId !== req.user.id) {
+    return res.status(403).json({
+      message: "Forbidden"
+    })
   }
 
   await spotImage.destroy();
