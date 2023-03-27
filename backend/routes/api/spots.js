@@ -14,23 +14,6 @@ const { handleValidationErrors } = require("../../utils/validation");
 
 const router = express.Router();
 
-// const validateSignup = [
-//     check("email")
-//       .exists({ checkFalsy: true })
-//       .isEmail()
-//       .withMessage("Please provide a valid email."),
-//     check("username")
-//       .exists({ checkFalsy: true })
-//       .isLength({ min: 4 })
-//       .withMessage("Please provide a username with at least 4 characters."),
-//     check("username").not().isEmail().withMessage("Username cannot be an email."),
-//     check("password")
-//       .exists({ checkFalsy: true })
-//       .isLength({ min: 6 })
-//       .withMessage("Password must be 6 characters or more."),
-//     handleValidationErrors,
-// ];
-
 const validateReview = [
   check("review")
     .exists({ checkFalsy: true })
@@ -508,8 +491,115 @@ router.put(
 
 // Get all Spots
 router.get("/", async (req, res) => {
+  let { page, size, minLat, maxLat, minLng, maxLng, minPrice, maxPrice } =
+    req.query;
+
+  if (!page) {
+    page = 1;
+  }
+
+  if (!size) {
+    size = 20;
+  }
+
+  page = parseInt(page);
+  size = parseInt(size);
+  minLat = parseFloat(minLat);
+  minLng = parseFloat(minLng);
+  maxLat = parseFloat(maxLat);
+  maxLng = parseFloat(maxLng);
+  minPrice = parseFloat(minPrice);
+  maxPrice = parseFloat(maxPrice);
+
+  const where = {};
+
+  const errors = {};
+
+  if ((page || page === 0) && (isNaN(page) || page < 1)) {
+    errors.page = "Page must be greater than or equal to 1";
+  }
+
+  if ((size || size === 0) && (isNaN(size) || size < 1)) {
+    errors.size = "Size must be greater than or equal to 1";
+  }
+  if (minLat && (minLat > maxLat || minLat < -90 || minLat > 90 || isNaN(minLat))) {
+    errors.minLat = "Minimum latitude is invalid"
+  }
+
+  if (maxLat && (maxLat < minLat || maxLat < -90 || maxLat > 90 || isNaN(maxLat))) {
+    errors.maxLat = "Maximum latitude is invalid"
+  }
+
+  if (
+    minLng &&
+    (minLng > maxLng || minLng < -180 || minLng > 180 || isNaN(minLng))
+  ) {
+    errors.minLng = "Minimum longitude is invalid";
+  }
+
+  if (
+    maxLng &&
+    (maxLng < minLng || maxLng < -180 || maxLng > 180 || isNaN(maxLng))
+  ) {
+    errors.maxLng = "Maximum longitude is invalid";
+  }
+
+  if (minPrice && (isNaN(minPrice) || minPrice < 0)) {
+    errors.minPrice = "Minimum price must be greater than or equal to 0";
+  }
+
+  if (maxPrice && (isNaN(maxPrice) || maxPrice < 0)) {
+    errors.maxPrice = "Maximum price must be greater than or equal to 0";
+  }
+
+  if (Object.keys(errors).length) {
+    return res.status(400).json({
+      message: "Bad Request",
+      errors,
+    });
+  }
+
+  if (minLat) {
+    where.lat = {
+      [Op.gte]: minLat
+    };
+  }
+
+  if (maxLat) {
+    where.lat = {
+      [Op.lte]: maxLat
+    };
+  }
+
+  if (minLng) {
+    where.lng = {
+      [Op.gte]: minLng
+    };
+  }
+
+  if (maxLng) {
+    where.lng = {
+      [Op.lte]: maxLng
+    };
+  }
+
+  if (minPrice) {
+    where.price = {
+      [Op.gte]: minPrice
+    };
+  }
+
+  if (maxPrice) {
+    where.price = {
+      [Op.lte]: maxPrice
+    };
+  }
+
+  const offset = (page - 1) * size;
+
   let spotsList = [];
   const spots = await Spot.findAll({
+    where,
     include: [
       {
         model: Review,
@@ -518,9 +608,10 @@ router.get("/", async (req, res) => {
         model: SpotImage,
       },
     ],
+    offset: offset,
+    limit: size,
     order: ["id"],
   });
-  // console.log(spots);
 
   spots.forEach((spot) => {
     spotsList.push(spot.toJSON());
@@ -528,14 +619,7 @@ router.get("/", async (req, res) => {
 
   spotsList.forEach((spot) => {
     let sum = 0;
-    // let count = await Review.count({
-    //     where: {
-    //         spotId: spot.id
-    //     }
-    // })
     let count = 0;
-
-    // console.log(count)
 
     spot.Reviews.forEach((review) => {
       sum += review.stars;
@@ -563,6 +647,8 @@ router.get("/", async (req, res) => {
   // console.log(spots)
   res.status(200).json({
     ["Spots"]: spotsList,
+    page,
+    size,
   });
 });
 
