@@ -93,10 +93,10 @@ router.put("/:reviewId", [requireAuth, validateReview], async (req, res) => {
     });
   }
 
-  console.log(review)
-  const spot = await Spot.findByPk(review.spotId)
+  // console.log(review)
+  // const spot = await Spot.findByPk(review.spotId)
 
-  if (spot.ownerId !== user.id) {
+  if (review.userId !== user.id) {
     return res.status(403).json({
       message: "Forbidden"
     })
