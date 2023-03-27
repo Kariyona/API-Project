@@ -110,7 +110,7 @@ router.post("/:spotId/bookings", [requireAuth], async (req, res) => {
 
 // Get all Bookings for a Spot based on the Spot's id
 router.get("/:spotId/bookings", [requireAuth], async (req, res) => {
-  const { spotId } = req.params;
+  const spotId = req.params.spotId;
 
   const spot = await Spot.findByPk(spotId);
 
@@ -144,6 +144,7 @@ router.get("/:spotId/bookings", [requireAuth], async (req, res) => {
 
     // console.log("booking.startDate raw:", startDate);
     // console.log("booking.endDate raw:", endDate);
+
     let bookingResponse;
 
     if (userId === spot.ownerId) {
@@ -685,6 +686,7 @@ router.post("/", [requireAuth, validateSpotCreation], async (req, res) => {
 });
 
 module.exports = router;
+
 // if requires proper authorization
 // const spot = await Spot.findByPk(req.params.spotId)
 // if (user) --> if (user.id === spot.ownerId)

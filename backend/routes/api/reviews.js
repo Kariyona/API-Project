@@ -70,10 +70,10 @@ router.put("/:reviewId", [requireAuth, validateReview], async (req, res) => {
   const { user } = req;
   const reviewId = req.params.reviewId;
 
+  // let review = await Review.findByPk(req.params.reviewId)
   let review = await Review.findOne({
     where: {
-      id: reviewId,
-      userId: user.id,
+      id: reviewId
     },
     include: [User, Spot],
     attributes: [
@@ -92,6 +92,16 @@ router.put("/:reviewId", [requireAuth, validateReview], async (req, res) => {
       message: "Review couldn't be found",
     });
   }
+
+  console.log(review)
+  const spot = await Spot.findByPk(review.spotId)
+
+  if (spot.ownerId !== user.id) {
+    return res.status(403).json({
+      message: "Forbidden"
+    })
+  }
+
 
   const { review: updatedReview, stars: updatedStars } = req.body;
 
