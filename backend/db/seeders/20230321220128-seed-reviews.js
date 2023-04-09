@@ -24,20 +24,68 @@ module.exports = {
         {
           userId: 1,
           spotId: 1,
-          review: "This movie suckz",
-          stars: 1,
-        },
-        {
-          userId: 2,
-          spotId: 2,
-          review: "This movie is amazing!",
+          review: "Beautiful house!",
           stars: 5,
         },
         {
-          userId: 3,
+          userId: 1,
+          spotId: 2,
+          review: "This place is amazing!",
+          stars: 5,
+        },
+        {
+          userId: 1,
           spotId: 3,
-          review: "This movie was okay",
+          review: "This place was okay",
           stars: 3,
+        },
+        {
+          userId: 2,
+          spotId: 4,
+          review: "My family enjoyed staying here",
+          stars: 4,
+        },
+        {
+          userId: 2,
+          spotId: 5,
+          review: "It was a decent vacation",
+          stars: 3,
+        },
+        {
+          userId: 2,
+          spotId: 6,
+          review: "I really like this place",
+          stars: 4,
+        },
+        {
+          userId: 2,
+          spotId: 7,
+          review: "The decor hurts my eyes",
+          stars: 1,
+        },
+        {
+          userId: 3,
+          spotId: 8,
+          review: "The wifi is bad",
+          stars: 1,
+        },
+        {
+          userId: 3,
+          spotId: 9,
+          review: "The included breakfast was yummy",
+          stars: 4,
+        },
+        {
+          userId: 3,
+          spotId: 10,
+          review: "The service was okay",
+          stars: 3,
+        },
+        {
+          userId: 3,
+          spotId: 1,
+          review: "The service was bad",
+          stars: 2,
         },
       ],
       {}
@@ -55,13 +103,8 @@ module.exports = {
     await queryInterface.bulkDelete(
       options,
       {
-        review: {
-          [Op.in]: [
-            "This movie suckz",
-            "This movie is amazing!",
-            "This movie was okay",
-          ],
-        },
+        userId: {
+          [Op.in]: [ 1,2,3 ] },
       },
       {}
     );
