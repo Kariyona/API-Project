@@ -22,7 +22,7 @@ module.exports = {
           lng: -118.5023, //-180 180
           name: "Ocean Front with Pool on Wild Sonoma Coast",
           description: "The Cove House in Timber Cove offers a dramatic and romantic experience you will savor for a lifetime. Intimate enough for the honeymoon of your dreams yet spacious enough for two couples. White water forever views, large spa and bluff top pool.",
-          price: 800,
+          price: 620,
         },
         {
           ownerId: 2,
@@ -34,7 +34,7 @@ module.exports = {
           lng: -122.9012, //-180 180
           name: "Magical Bamboo House",
           description: "Come visit this Magical Bamboo House for a fun surprise.",
-          price: 106,
+          price: 25,
         },
         {
           ownerId: 3,
@@ -46,7 +46,7 @@ module.exports = {
           lng: -100.7524, //-180 180
           name: "Villa in Kecamatan",
           description: "Intimiate Private Pool Villas.",
-          price: 57,
+          price: 106,
         },
         {
           ownerId: 1,
@@ -63,12 +63,12 @@ module.exports = {
         {
           ownerId: 2,
           address: "140 Miles St.",
-          city: "South Lake Tahoe",
+          city: "San Diego",
           state: "California",
           country: "USA",
           lat: 50.1163, //-90 90
           lng: -122.9122, //-180 180
-          name: "Best Cabin Ever",
+          name: "Secluded Private Beach House",
           description: "This 6 bedrooms, 6 bath brand new luxury Tahoe Donner home has all you need to keep a big family or group of friends comfortable and well entertained for however long you book it for.",
           price: 500,
         },
@@ -80,9 +80,9 @@ module.exports = {
           country: "USA",
           lat: 41.3692, //-90 90
           lng: -87.9211, //-180 180
-          name: "Luxe Highrise Apartment Homes",
-          description: "The highest of riser apartments in New York.",
-          price: 1400,
+          name: "Cabin Under The Night Sky ",
+          description: "Best view of the night sky and stars in New York. You won't get this anywhere in the city!",
+          price: 640,
         },
         {
           ownerId: 1,
@@ -104,21 +104,21 @@ module.exports = {
           country: "USA",
           lat: 1.2928, //-90 90
           lng: 103.9084, //-180 180
-          name: "Penthouse w/ Private Terrace",
+          name: "Beautiful home in heart of downtown Chicago",
           description: "Located in the heart of downtown, it is walking distance everywhere.",
           price: 300,
         },
         {
           ownerId: 3,
           address: "1 Sunny Side Up Rd.",
-          city: "Sunny",
-          state: "Florida",
+          city: "Phoenix",
+          state: "Arizona",
           country: "USA",
           lat: -8.6913, //-90 90
           lng: 115.1772, //-180 180
-          name: "Beachfront Bungalow",
-          description: "Bring your friends and unwind with the nicest views in Florida.",
-          price: 140,
+          name: "Beachfront Bungalow Villa",
+          description: "Bring your friends and unwind with the nicest views in Arizona. Escape the heat.",
+          price: 200,
         },
         {
           ownerId: 1,
