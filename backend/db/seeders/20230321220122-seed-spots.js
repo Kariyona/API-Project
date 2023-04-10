@@ -49,7 +49,7 @@ module.exports = {
           price: 106,
         },
         {
-          ownerId: 1,
+          ownerId: 4,
           address: "91 Malibu Beach Rd.",
           city: "Malibu",
           state: "California",
@@ -61,7 +61,7 @@ module.exports = {
           price: 390,
         },
         {
-          ownerId: 2,
+          ownerId: 5,
           address: "140 Miles St.",
           city: "San Diego",
           state: "California",
@@ -73,7 +73,7 @@ module.exports = {
           price: 500,
         },
         {
-          ownerId: 3,
+          ownerId: 1,
           address: "15 Park Ave.",
           city: "New York",
           state: "New York",
@@ -85,7 +85,7 @@ module.exports = {
           price: 640,
         },
         {
-          ownerId: 1,
+          ownerId: 2,
           address: "123 Battery St.",
           city: "San Francisco",
           state: "California",
@@ -97,7 +97,7 @@ module.exports = {
           price: 520,
         },
         {
-          ownerId: 2,
+          ownerId: 3,
           address: "228 S Rodeo Dr.",
           city: "Chicago",
           state: "Illinois",
@@ -109,7 +109,7 @@ module.exports = {
           price: 300,
         },
         {
-          ownerId: 3,
+          ownerId: 4,
           address: "1 Sunny Side Up Rd.",
           city: "Phoenix",
           state: "Arizona",
@@ -121,7 +121,7 @@ module.exports = {
           price: 200,
         },
         {
-          ownerId: 1,
+          ownerId: 5,
           address: "400 Cherry St.",
           city: "Denver",
           state: "Colorado",
@@ -148,7 +148,7 @@ module.exports = {
     await queryInterface.bulkDelete(
       options,
       {
-        ownerId: { [Op.in]: [1,2,3,4,5,6,7,8,9,10] },
+        ownerId: { [Op.in]: [1,2,3,4,5] },
       },
       {}
     );
