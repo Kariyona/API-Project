@@ -8,6 +8,9 @@ const SpotIndex = () => {
     const dispatch = useDispatch();
 
     const spotsObject = useSelector(state => state.spots)
+    const spotsObject2 = useSelector(state => state)
+    console.log('tag: ', spotsObject2);
+
     const spots = Object.values(spotsObject || {})
 
     useEffect(() => {

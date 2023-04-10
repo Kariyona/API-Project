@@ -1,17 +1,25 @@
-import { useDispatch, useSelector } from "react-redux";
-import { thunkGetSpot } from '../../store/spots';
+import { useDispatch } from "react-redux";
+// import { thunkGetSpot } from '../../store/spots';
 import './Landing.css';
+import { useHistory } from 'react-router-dom';
+
 
 const SpotIndexItem = ({ spot }) => {
     let dispatch = useDispatch()
+    const history = useHistory();
     // const handleDelete = (e) => {
     //     e.preventDefault();
         // dispatch(thunkGetSpot(spot.id))
     //
-    console.log(spot);
+    // console.log(spot);
+
+    const handleSpotDetailsClick = () => {
+        history.push(`/spots/${spot.id}`)
+    }
+
     return (
         <>
-        <div className="spot-card">
+        <div className="spot-card" onClick={handleSpotDetailsClick}>
 
             <div className="spot-card-tile" title={spot.name}>
                 <div className="spot-image"><img src={spot.previewImage} alt={spot.name}/>
