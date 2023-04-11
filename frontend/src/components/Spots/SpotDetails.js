@@ -19,6 +19,9 @@ const SpotDetails = () => {
   if (!spot) return null;
   console.log("spots: ", spot);
 
+  const handleReserveBtnClick = () => {
+    alert("Feature Coming Soon...")
+  }
   return (
     <>
       <div>
@@ -35,7 +38,22 @@ const SpotDetails = () => {
           ))}
         </div>
 
-        <h2>Hosted by {spot.Owner?.firstName} {spot.Owner?.lastName}</h2>
+        <div className="host-and-description">
+          <h2>Hosted by {spot.Owner?.firstName} {spot.Owner?.lastName}</h2>
+          <p>{spot.description}</p>
+        </div>
+
+        <div className="callout-info-box">
+          <div className="price">
+            {`$${spot.price} night`}
+          </div>
+
+          <div className="star-reviews"></div>
+
+          <div className="reserve-button">
+            <button onClick={handleReserveBtnClick}>Reserve</button>
+          </div>
+        </div>
       </div>
     </>
   );
