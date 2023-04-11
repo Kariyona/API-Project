@@ -379,7 +379,7 @@ router.get("/:spotId", async (req, res) => {
       lat: spot.lat,
       lng: spot.lng,
       name: spot.name,
-      desciption: spot.description,
+      description: spot.description,
       price: spot.price,
       createdAt: spot.createdAt,
       updatedAt: spot.updatedAt,
