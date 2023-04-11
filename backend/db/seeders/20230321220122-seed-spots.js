@@ -39,7 +39,7 @@ module.exports = {
         {
           ownerId: 3,
           address: "97 Kecamatan St.",
-          city: "Ubud ",
+          city: "Ubud",
           state: "Indonesia",
           country: "Indonesia",
           lat: 20.4199, //-90 90

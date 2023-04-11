@@ -1,3 +1,58 @@
-.callout-info-box {
+/* .callout-info-box {
     border: 3px lightpink solid;
 }
+
+.thumbnail-images {
+    width: 100%;
+    height: auto;
+}
+
+.big-thumbnail-image {
+   height: auto;
+   width: 500px;
+}
+
+.spot-images {
+    display: flex;
+    flex-wrap: wrap;
+}
+
+.small-thumbnail-images {
+    display: flex;
+    flex-wrap: wrap;
+    flex: 1 1 50%;
+}
+
+.big-image {
+    flex: 1 1 50%;
+} */
+
+.host-and-review-container {
+    display: flex;
+    justify-content: space-between;
+}
+
+
+/* .spot-images {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+
+    grid-gap: 5px;
+}
+
+.small-thumbnail-images {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    grid-template-rows: repeat(2, 1fr);
+    grid-gap: 5px;
+}
+
+.thumbnail-images {
+    width: 100%;
+    height: 100%;
+}
+
+.big-thumbnail-image {
+    height: 430px;
+    width: 500px;
+ } */

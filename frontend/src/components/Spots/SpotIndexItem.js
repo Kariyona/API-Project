@@ -18,7 +18,9 @@ const SpotIndexItem = ({ spot }) => {
     }
 
     return (
+
         <>
+
         <div className="spot-card" onClick={handleSpotDetailsClick}>
 
             <div className="spot-card-tile" title={spot.name}>
@@ -30,7 +32,8 @@ const SpotIndexItem = ({ spot }) => {
 
                     <div className="edit-star-and-rating">
                         <i className="fa-solid fa-star" />
-                        <p>{spot.avgRating}</p>
+
+                        <p>{spot.avgRating % 1 === 0 ? spot.avgRating + ".0" : spot.avgRating}</p>
                     </div>
                 </div>
 
