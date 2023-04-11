@@ -11,7 +11,8 @@ const SpotDetails = () => {
   const spotsObject = Object.values(spots || {});
   const spot = spotsObject.find((spot) => spot.id === parseInt(spotId));
 
-
+  //test
+  
   useEffect(() => {
     dispatch(thunkGetSpot(spotId));
   }, [dispatch, spotId]);
@@ -53,6 +54,7 @@ const SpotDetails = () => {
           <div className="reserve-button">
             <button onClick={handleReserveBtnClick}>Reserve</button>
           </div>
+
         </div>
       </div>
     </>
