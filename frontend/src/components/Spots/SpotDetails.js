@@ -21,8 +21,8 @@ const SpotDetails = () => {
   console.log("spots: ", spot);
 
   const handleReserveBtnClick = () => {
-    alert("Feature Coming Soon...")
-  }
+    alert("Feature Coming Soon...");
+  };
   return (
     <>
       <div>
@@ -35,26 +35,44 @@ const SpotDetails = () => {
 
         <div className="spot-images">
           {spot.SpotImages?.map((image) => (
-            <img key={image.id} src={image.url} alt="image"/>
+            <img key={image.id} src={image.url} alt={spot.name}/>
           ))}
-        </div>
+          {/* <div className="big-image">
+            <img
+              className="big-thumbnail-image"
+              src={spot.SpotImages[0].url}
+              alt={spot.name}
+            />
+          </div>
 
+          <div className="small-thumbnail-images">
+            {spot.SpotImages.slice(1, 5).map((image) => (
+              <img
+                key={image.id}
+                src={image.url}
+                alt={spot.name}
+                className="thumbnail-images"
+              />
+            ))}
+          </div> */}
+        </div>
+<div className="host-and-review-container">
         <div className="host-and-description">
-          <h2>Hosted by {spot.Owner?.firstName} {spot.Owner?.lastName}</h2>
+          <h2>
+            Hosted by {spot.Owner?.firstName} {spot.Owner?.lastName}
+          </h2>
           <p>{spot.description}</p>
         </div>
 
         <div className="callout-info-box">
-          <div className="price">
-            {`$${spot.price} night`}
-          </div>
+          <div className="price">{`$${spot.price} night`}</div>
 
           <div className="star-reviews"></div>
 
           <div className="reserve-button">
             <button onClick={handleReserveBtnClick}>Reserve</button>
           </div>
-
+          </div>
         </div>
       </div>
     </>
