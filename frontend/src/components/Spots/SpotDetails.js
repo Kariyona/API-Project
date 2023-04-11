@@ -12,7 +12,7 @@ const SpotDetails = () => {
   const spot = spotsObject.find((spot) => spot.id === parseInt(spotId));
 
   //test
-  
+
   useEffect(() => {
     dispatch(thunkGetSpot(spotId));
   }, [dispatch, spotId]);
@@ -35,7 +35,7 @@ const SpotDetails = () => {
 
         <div className="spot-images">
           {spot.SpotImages?.map((image) => (
-            <img key={image.id} src={image.url} />
+            <img key={image.id} src={image.url} alt="image"/>
           ))}
         </div>
 
