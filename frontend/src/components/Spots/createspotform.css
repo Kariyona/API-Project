@@ -1,0 +1,11 @@
+.line {
+    border: solid grey 1px;
+    margin-top: 15px;
+    /* margin-bottom: 5px; */
+}
+
+.image-links {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+}
