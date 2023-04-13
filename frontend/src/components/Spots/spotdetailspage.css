@@ -1,7 +1,9 @@
-/* .callout-info-box {
+ .callout-info-box {
     border: 3px lightpink solid;
+
 }
 
+/*
 .thumbnail-images {
     width: 100%;
     height: auto;
@@ -30,6 +32,7 @@
 .host-and-review-container {
     display: flex;
     justify-content: space-between;
+    align-items: center;
 }
 
 

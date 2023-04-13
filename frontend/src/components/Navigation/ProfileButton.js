@@ -1,13 +1,16 @@
 import React, { useState, useEffect, useRef } from "react";
-import { useDispatch } from 'react-redux';
-import * as sessionActions from '../../store/session';
-import OpenModalMenuItem from './OpenModalMenuItem';
-import LoginFormModal from '../LoginFormModal';
-import SignupFormModal from '../SignupFormModal';
-import './Navigation.css'
+import { useDispatch } from "react-redux";
+import * as sessionActions from "../../store/session";
+import OpenModalMenuItem from "./OpenModalMenuItem";
+import LoginFormModal from "../LoginFormModal";
+import SignupFormModal from "../SignupFormModal";
+import "./Navigation.css";
+import { thunkGetAllSpots } from "../../store/spots";
+import { useHistory } from "react-router-dom";
 
 function ProfileButton({ user }) {
   const dispatch = useDispatch();
+  const history = useHistory();
   const [showMenu, setShowMenu] = useState(false);
   const ulRef = useRef();
 
@@ -25,7 +28,7 @@ function ProfileButton({ user }) {
       }
     };
 
-    document.addEventListener('click', closeMenu);
+    document.addEventListener("click", closeMenu);
 
     return () => document.removeEventListener("click", closeMenu);
   }, [showMenu]);
@@ -38,19 +41,31 @@ function ProfileButton({ user }) {
     closeMenu();
   };
 
+  const HandleManageSpotsClick = (e, spotId) => {
+    e.preventDefault();
+    history.push(`/spots/current`);
+    closeMenu();
+  };
+
   const ulClassName = "profile-dropdown" + (showMenu ? "" : " hidden");
 
   return (
     <>
       <button className="profile-menu-btn" onClick={openMenu}>
-      <i className="fa-solid fa-bars"></i> <i className="fas fa-user-circle" />
+        <i className="fa-solid fa-bars"></i>{" "}
+        <i className="fas fa-user-circle" />
       </button>
       <ul className={ulClassName} ref={ulRef}>
         {user ? (
           <>
             <li>{user.username}</li>
-            <li>{user.firstName} {user.lastName}</li>
+            <li>
+              {user.firstName} {user.lastName}
+            </li>
             <li>{user.email}</li>
+            <li>
+              <button onClick={HandleManageSpotsClick}>Manage Spots</button>
+            </li>
             <li>
               <button onClick={logout}>Log Out</button>
             </li>

@@ -11,3 +11,12 @@
 .profile-menu-btn {
     cursor: pointer;
 }
+
+.rightNav {
+    display: flex;
+    align-items: center;
+}
+
+.NavBar a {
+    text-decoration: none;
+}
