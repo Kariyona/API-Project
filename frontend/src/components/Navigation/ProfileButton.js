@@ -5,7 +5,7 @@ import OpenModalMenuItem from "./OpenModalMenuItem";
 import LoginFormModal from "../LoginFormModal";
 import SignupFormModal from "../SignupFormModal";
 import "./Navigation.css";
-import { thunkGetAllSpots } from "../../store/spots";
+
 import { useHistory } from "react-router-dom";
 
 function ProfileButton({ user }) {

@@ -11,8 +11,8 @@ const SpotDetails = () => {
   const spotsObject = Object.values(spots || {});
   const spot = spotsObject.find((spot) => spot.id === parseInt(spotId));
 
+console.log("very big tag: ", spot);
 
-  
   useEffect(() => {
     dispatch(thunkGetSpot(spotId));
   }, [dispatch, spotId]);
@@ -25,6 +25,7 @@ const SpotDetails = () => {
   const handleReserveBtnClick = () => {
     alert("Feature Coming Soon...");
   };
+
   return (
     <>
       <div>

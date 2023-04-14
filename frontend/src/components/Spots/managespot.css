@@ -1,0 +1,7 @@
+.spot-tile {
+    display: grid;
+    grid-template-columns: repeat(4,1fr);
+    /* justify-content: center; */
+    /* padding: 20px 60px; */
+    grid-gap: 15px;
+}

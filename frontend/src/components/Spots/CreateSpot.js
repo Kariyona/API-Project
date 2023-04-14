@@ -1,8 +1,8 @@
 import "./createspotform.css";
 import { useDispatch } from "react-redux";
 import { useState, useEffect } from "react";
-import { useHistory } from "react-router-dom";
-import { thunkCreateImage, thunkCreateSpot } from "../../store/spots";
+import { useHistory } from "react-router";
+import { thunkCreateSpot } from "../../store/spots";
 const Form = () => {
   const history = useHistory();
   let dispatch = useDispatch();
@@ -26,16 +26,7 @@ const Form = () => {
   // const [invalid, setInvalid] = useState(true);
   const [isSubmitted, setIsSubmitted] = useState(false);
 
-  // useEffect(() => {
-  //   (country.length > 0 &&
-  //       address.length > 0 &&
-  //       city.length > 0 &&
-  //       state.length > 0
-  //       )
-  // }) ? setInvalid(false) : setInvalid(true)
-
-  const handleClick = async (e) => {
-    e.preventDefault();
+  useEffect(() => {
     const errors = {};
     if (country.length === 0) errors.country = "Country is required";
     if (address.length === 0) errors.address = "Address is required";
@@ -51,33 +42,156 @@ const Form = () => {
       !previewImg.endsWith(".png") &&
       !previewImg.endsWith(".jpg") &&
       !previewImg.endsWith(".jpeg")
-    )
+    ) {
       errors.previewImg = "Image URL must end in .png, .jpg, .jpeg";
+    }
 
+    // if imageUrl exists check
+    // if it ends with png/jpg/jpeg
+    // then if it doesn't then put that error into error object
+    if (imageUrl1) {
+      if (
+        !imageUrl1.endsWith(".png") &&
+        !imageUrl1.endsWith(".jpg") &&
+        !imageUrl1.endsWith(".jpeg")
+      ) {
+        errors.imageUrl1 = "Image1 URL must end in .png, .jpg, .jpeg"
+      }
+    }
+
+    if (imageUrl2) {
+      if (
+        !imageUrl2.endsWith(".png") &&
+        !imageUrl2.endsWith(".jpg") &&
+        !imageUrl2.endsWith(".jpeg")
+      ) {
+        errors.imageUrl2 = "Image2 URL must end in .png, .jpg, .jpeg"
+      }
+    }
+
+    if (imageUrl3) {
+      if (
+        !imageUrl3.endsWith(".png") &&
+        !imageUrl3.endsWith(".jpg") &&
+        !imageUrl3.endsWith(".jpeg")
+      ) {
+        errors.imageUrl3 = "Image3 URL must end in .png, .jpg, .jpeg"
+      }
+    }
+
+    if (imageUrl4) {
+      if (
+        !imageUrl4.endsWith(".png") &&
+        !imageUrl4.endsWith(".jpg") &&
+        !imageUrl4.endsWith(".jpeg")
+      ) {
+        errors.imageUrl4 = "Image4 URL must end in .png, .jpg, .jpeg"
+      }
+    }
     setValidationErrors(errors);
-    const data = {
-      address,
-      city,
-      state,
-      country,
-      lat: 0,
-      lng: 0,
-      name,
-      description,
-      price,
-    };
 
-    const imageObject = {
-      url: previewImg,
-      preview: true,
-    };
-    console.log("before dispatch")
-    const newSpot = await dispatch(thunkCreateSpot(data));
-    const spotX = newSpot;
-    console.log("newSpot tag: ", spotX);
-    await dispatch(thunkCreateImage(imageObject, spotX.id));
-    console.log("after dispatch")
-    setIsSubmitted(true);
+
+
+    //   if (
+    //     (country.length > 0 &&
+    //       address.length > 0 &&
+    //       city.length > 0 &&
+    //       state.length > 0 &&
+    //       description.length >= 30 &&
+    //       name.length > 0 &&
+    //     price.length > 0)
+    //   ) {
+    //     setInvalid(false);
+    //   } else {
+    //     setInvalid(true);
+    //   }
+  }, [country, address, city, state, description, name, price, previewImg]);
+
+  // HANDLE submit
+    // if they click submit, we set isSubmitted to true
+    // the submit has to check if the error object has errors
+    // if there are errors then display those errors
+    // if it doesnt it will run the submit
+  const handleClick = async (e) => {
+    console.log("handle click submit function running")
+    e.preventDefault();
+    setIsSubmitted(true)
+
+   const errorArr = Object.values(validationErrors)
+    console.log("this is errors array in handle click: ", errorArr);
+  //  console.log(errorObject);
+
+   if (errorArr.length > 0) {
+    console.log("if errors array.lenth === 0 running")
+    return
+   } else {
+    const newSpotData = {
+          address,
+          city,
+          state,
+          country,
+          lat: 0,
+          lng: 0,
+          name,
+          description,
+          price,
+        };
+
+        // we need an array
+        // if the image exists, make object, then put it inside the array
+        const imageArr = [];
+
+        const prevImgObj =
+        {
+          url: previewImg,
+          preview: true,
+        }
+        imageArr.push(prevImgObj)
+
+        if (imageUrl1) {
+          const imageObj1 = {
+            url: imageUrl1,
+            preview: false
+          }
+          imageArr.push(imageUrl1);
+        }
+        if (imageUrl2) {
+          const imageObj2 = {
+            url: imageUrl2,
+            preview: false
+          }
+          imageArr.push(imageUrl2);
+        }
+        if (imageUrl3) {
+          const imageObj3 = {
+            url: imageUrl3,
+            preview: false
+          }
+          imageArr.push(imageUrl3);
+        }
+        if (imageUrl4) {
+          const imageObj4 = {
+            url: imageUrl4,
+            preview: false
+          }
+          imageArr.push(imageUrl4);
+        }
+
+        console.log("this is new spot object and image array in handle click: ", newSpotData, imageArr)
+        console.log("before dispatch");
+
+        const createdSpot = await dispatch(thunkCreateSpot(newSpotData, imageArr));
+        console.log("this is after thunk create spot. this is created spot: ", createdSpot)
+
+        // const spotX = newSpot;
+        // console.log("newSpot tag: ", spotX);
+        // await dispatch(thunkCreateImage(imageObject, spotX.id));
+        // console.log("after dispatch");
+
+        if (createdSpot.id) {
+          history.push(`/spots/${createdSpot.id}`)
+        }
+    }
   };
   // console.table(data)
 
@@ -96,6 +210,7 @@ const Form = () => {
           value={country}
           onChange={(e) => setCountry(e.target.value)}
           placeholder="Country"
+          required
         />
       </div>
       {isSubmitted && (
@@ -103,12 +218,13 @@ const Form = () => {
       )}
 
       <div className="form-data">
-        <label htmFor="">Street Address</label>
+        <label htmlFor="">Street Address</label>
         <input
           type="text"
           value={address}
           onChange={(e) => setAddress(e.target.value)}
           placeholder="Address"
+          required
         />
       </div>
       {isSubmitted && (
@@ -116,28 +232,30 @@ const Form = () => {
       )}
 
       <div className="form-data">
-        <label htmFor="">City</label>
+        <label htmlFor="">City</label>
         <input
           type="text"
           value={city}
           onChange={(e) => setCity(e.target.value)}
           placeholder="City"
+          required
         />
       </div>
       {isSubmitted && <span className="errors">{validationErrors.city}</span>}
 
       <div className="form-data">
-        <label htmFor="">State</label>
+        <label htmlFor="">State</label>
         <input
           type="text"
           value={state}
           onChange={(e) => setState(e.target.value)}
           placeholder="STATE"
+          required
         />
       </div>
       {isSubmitted && <span className="errors">{validationErrors.state}</span>}
       {/* <div className="form-data">
-        <label htmFor="">Latitude</label>
+        <label htmlFor="">Latitude</label>
         <input
           type="text"
           value={latitude}
@@ -146,7 +264,7 @@ const Form = () => {
         />
       </div>
       <div className="form-data">
-        <label htmFor="">Longitude</label>
+        <label htmlFor="">Longitude</label>
         <input
           type="text"
           value={longitude}
@@ -167,6 +285,7 @@ const Form = () => {
           value={description}
           onChange={(e) => setDescription(e.target.value)}
           placeholder="Please write at least 30 characters"
+          required
         />
       </div>
       {isSubmitted && (
@@ -186,6 +305,7 @@ const Form = () => {
           value={name}
           onChange={(e) => setName(e.target.value)}
           placeholder="Name of your spot"
+          required
         />
       </div>
       {isSubmitted && <span className="errors">{validationErrors.name}</span>}
@@ -198,25 +318,30 @@ const Form = () => {
         search results.
       </p>
       <div className="form-data">
-        <label htmFor="">$ </label>
+        <label htmlFor="">$ </label>
         <input
           type="number"
           value={price}
           onChange={(e) => setPrice(e.target.value)}
           placeholder="Price per night (USD)"
+          required
         />
       </div>
       {isSubmitted && <span className="errors">{validationErrors.price}</span>}
       <div className="line"></div>
       <div className="form-data">
         <h3>Liven up your spot with photos</h3>
-        <p>Submit a link to at least one photo to publish your spot.</p>
+        <p>
+          Submit a link to at least one photo to publish your spot. The first
+          spot will be the preview image.
+        </p>
         <div className="image-links">
           <input
             type="text"
             value={previewImg}
             onChange={(e) => setPreviewImg(e.target.value)}
             placeholder="Preview image URL"
+            required
           />
           {isSubmitted && (
             <span className="errors">{validationErrors.previewImg}</span>
@@ -251,7 +376,9 @@ const Form = () => {
         </div>
 
         <div className="line"></div>
-        <button onClick={handleClick}>Create Spot</button>
+        <button onClick={handleClick}>
+          Create Spot
+        </button>
       </div>
     </div>
   );
