@@ -1,5 +1,5 @@
 import { useDispatch, useSelector } from "react-redux";
-import { thunkCreateImage, thunkGetAllSpotsByUser } from "../../store/spots";
+import { thunkCreateImage, thunkGetAllSpotsByUser, thunkUpdateSpot } from "../../store/spots";
 import { useEffect } from "react";
 import SpotIndexItem from "./SpotIndexItem";
 import { NavLink } from "react-router-dom";
@@ -23,6 +23,11 @@ const ManageSpot = () => {
 
   if (!spots) return null;
 
+  const handleUpdate = async (spotId) => {
+    console.log("spotId=======", spotId)
+    history.push(`/spots/${spotId}/edit`)
+  }
+
   if (spotsObject.length === 0) {
     return (
       <>
@@ -34,16 +39,15 @@ const ManageSpot = () => {
     );
   }
 
-
   return (
     <>
       <div>
         <h2>Manage Spots</h2>
         <div className="spot-tile">
           {spotsObject.map((spot) => (
-            <div>
+            <div key={spot.id}>
               <SpotIndexItem spot={spot} key={spot.id} />
-              <button>Update</button>
+              <button onClick={()=>handleUpdate(spot.id)}>Update</button>
               <OpenModalButton
                 modalComponent={<DeleteSpotModal spotId={spot.id}/>}
                 buttonText="Delete"

@@ -2,6 +2,7 @@ import React, { useState } from "react";
 import { useModal } from "../../context/Modal";
 import { useDispatch } from "react-redux";
 import { thunkDeleteSpot } from "../../store/spots";
+import './DeleteSpotModal.css'
 
 function DeleteSpotModal({spotId}) {
     const dispatch = useDispatch();
@@ -15,9 +16,9 @@ function DeleteSpotModal({spotId}) {
     return (
         <>
         <h1>Confirm Delete</h1>
-        <p>Are you sure you want to remve this spot?</p>
-        <button onClick={handleDelete}>Yes (Delete Spot)</button>
-        <button onClick={closeModal}>No (Keep Spot)</button>
+        <p>Are you sure you want to remve this spot from the listings?</p>
+        <button className="delete" onClick={handleDelete}>Yes (Delete Spot)</button>
+        <button className="update" onClick={closeModal}>No (Keep Spot)</button>
         </>
     )
 }
