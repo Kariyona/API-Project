@@ -409,19 +409,22 @@ router.post("/:spotId/images", [requireAuth], async (req, res) => {
 
   const { url, preview } = req.body;
   // instance of the model
+  
+  console.log("=========url from spots route api==================: ", url);
+
   const addImage = await SpotImage.create({
     spotId: spot.id,
     url,
     preview,
   });
 
-  const newImage = addImage.toJSON(); //
+  // const newImage = addImage.toJSON(); //
 
-  delete newImage.spotId;
-  delete newImage.createdAt;
-  delete newImage.updatedAt;
+  // delete newImage.spotId;
+  // delete newImage.createdAt;
+  // delete newImage.updatedAt;
 
-  return res.status(200).json(newImage);
+  return res.status(200).json(addImage);
 });
 
 // Delete a Spot

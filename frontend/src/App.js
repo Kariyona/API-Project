@@ -9,6 +9,7 @@ import ManageSpot from './components/Spots/ManageSpot';
 import SpotIndex from './components/Spots/index';
 import SpotDetails from "./components/Spots/SpotDetails";
 import Form from './components/Spots/CreateSpot';
+import CreateSpotRedirect from './components/Spots/CreateSpotRedirect';
 
 function App() {
   const dispatch = useDispatch();
@@ -26,6 +27,7 @@ function App() {
           <Route exact path="/" component={SpotIndex} />
           <Route path="/spots/new" component={Form} />
           <Route exact path="/spots/:spotId" component={SpotDetails} />
+          {/* <Route exact path="/spots/:spotId" component={CreateSpotRedirect }/> */}
         </Switch>
       )}
     </>
