@@ -39,16 +39,15 @@ const Form = ({ spot, type }) => {
     if (type === "CreateSpotForm") {
       if (previewImg.length === 0)
         errors.previewImg = "Preview image is required";
-    }
 
-    if (
-      !previewImg.endsWith(".png") &&
-      !previewImg.endsWith(".jpg") &&
-      !previewImg.endsWith(".jpeg")
-    ) {
-      errors.previewImg = "Image URL must end in .png, .jpg, .jpeg";
+      if (
+        !previewImg.endsWith(".png") &&
+        !previewImg.endsWith(".jpg") &&
+        !previewImg.endsWith(".jpeg")
+      ) {
+        errors.previewImg = "Image URL must end in .png, .jpg, .jpeg";
+      }
     }
-
     // if imageUrl exists check
     // if it ends with png/jpg/jpeg
     // then if it doesn't then put that error into error object
@@ -157,33 +156,31 @@ const Form = ({ spot, type }) => {
           };
           imageArr.push(imageUrl4);
         }
-        //   console.log(
-        //     "this is new spot object and image array in handle click: ",
-        //     newSpotData,
-        //     imageArr
-        //   );
-        //   console.log("before dispatch");
+
+        // data.imageArr = imageArr;
 
         const createdSpot = await dispatch(thunkCreateSpot(data, imageArr));
-        //   console.log(
-        //     "this is after thunk create spot. this is created spot: ",
-        //     createdSpot
-        //   );
 
         if (createdSpot.id) {
           history.push(`/spots/${createdSpot.id}`);
         }
       } else if (type === "UpdateSpotForm") {
         const updatedSpot = await dispatch(thunkUpdateSpot(data, spot.id));
+        console.log("blahblah");
         history.push(`/spots/${updatedSpot.id}`);
+        // const updatedSpot = await dispatch(thunkUpdateSpot(data)).then(()=>{
+        // })
       }
     }
   };
 
   return (
     <div className="form-container">
-      {type === "CreateSpotForm" ? <h1>Create a New Spot</h1> :
-      <h1>Update your Spot</h1>}
+      {type === "CreateSpotForm" ? (
+        <h1>Create a New Spot</h1>
+      ) : (
+        <h1>Update your Spot</h1>
+      )}
 
       <div className="form-data">
         <h3>Where's your place located?</h3>
@@ -341,9 +338,11 @@ const Form = ({ spot, type }) => {
           <div className="line"></div>
         </div>
       )}
-        {type === "CreateSpotForm" ? <button onClick={handleClick}>Create Spot</button> :
-      <button onClick={handleClick}>Update Spot</button>}
-
+      {type === "CreateSpotForm" ? (
+        <button onClick={handleClick}>Create Spot</button>
+      ) : (
+        <button onClick={handleClick}>Update Your Spot</button>
+      )}
     </div>
   );
 };

@@ -11,6 +11,7 @@ const CreateSpot = () => {
         price: "",
         lat: 0,
         lng: 0
+        //test
     }
     return (
         <Form spot={spot} type="CreateSpotForm"/>

@@ -59,7 +59,7 @@ export const thunkGetAllSpots = () => async (dispatch) => {
     const spots = await response.json();
     console.log("thunkGetAllSpots dispatching actionGetAllSpots");
     dispatch(actionGetAllSpots(spots));
-    return dispatch;
+    return spots;
   }
 };
 
@@ -73,7 +73,7 @@ export const thunkGetSpot = (spotId) => async (dispatch) => {
     const spot = await response.json();
     console.log("thunkGetSpot dispatching actionGetSpot");
     dispatch(actionGetSpot(spot));
-    return dispatch;
+    return spot;
   }
 };
 
@@ -91,7 +91,7 @@ export const thunkUpdateSpot = (spot, spotId) => async (dispatch) => {
   } else {
     const spot = await response.json();
     dispatch(actionUpdateSpot(spot));
-    return dispatch;
+    return spot;
   }
 };
 
@@ -104,7 +104,7 @@ export const thunkDeleteSpot = (spotId) => async (dispatch) => {
     return errors;
   } else {
     dispatch(actionDeleteSpot(spotId));
-    // return;
+    // return
   }
 };
 
@@ -173,7 +173,7 @@ export const thunkGetAllSpotsByUser = () => async (dispatch) => {
     console.log("Dispatching actionGetAllSpotsByUser with payload:", spot);
     dispatch(actionGetAllSpotsByUser(spot));
     console.log("dispatched actionGetAllSpotsByUser");
-    return dispatch;
+    return spot;
   }
 };
 
