@@ -13,17 +13,16 @@ export const actionGetSpotReviews = (reviewsPayload) => ({
     reviewsPayload
 })
 
-// export const actionCreateReview = () => ({
-//     type: CREATE_REVIEW
-// })
+export const actionCreateReview = (reviewPayload) => ({
+    type: CREATE_REVIEW,
+    reviewPayload
+})
 
-// export const actionGetReviews = () => ({
-//     type: GET_REVIEWS
-// })
 
-// export const actionDeleteReview = () => ({
-//     type: DELETE_REVIEW
-// })
+export const actionDeleteReview = (reviewIdPayload) => ({
+    type: DELETE_REVIEW,
+    reviewIdPayload,
+})
 
 
 /** Thunk Action Creators: */
@@ -39,9 +38,37 @@ export const thunkGetSpotReviews = (spotId) => async (dispatch) => {
     }
 }
 
-// export const thunkCreateReview = () => async (dispatch) => {
+export const thunkDeleteReview = (reviewId) => async (dispatch) => {
+    const response = await csrfFetch(`/api/reviews/${reviewId}`, {
+        method: "DELETE",
+    })
+    if (!response.ok) {
+        const errors = await response.json();
+        return errors;
+    } else {
+        dispatch(actionDeleteReview(reviewId))
+    }
+}
 
-// }
+export const thunkCreateReview = (newReview, spotId) => async (dispatch) => {
+    const response = await csrfFetch(`/api/spots/${spotId}/reviews`, {
+        method: "POST",
+        headers: {
+            "Content-Type": "application/json",
+        },
+        body: JSON.stringify(newReview)
+    })
+    if (!response.ok) {
+        const errors = await response.json();
+        return errors;
+    } else {
+        const review = await response.json()
+        dispatch(actionCreateReview(review))
+        const reviews = await dispatch(thunkGetSpotReviews(spotId))
+        return reviews;
+    }
+
+}
 
 
 /** Reducers */
@@ -53,6 +80,11 @@ const reviewsReducer = (state = {}, action) => {
                 reviewsBySpotState[review.id] = review;
             })
             return reviewsBySpotState;
+        }
+        case DELETE_REVIEW: {
+            const newState = { ...state }
+            delete newState[action.reviewIdPayload];
+            return newState;
         }
         default:
             return state;

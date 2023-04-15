@@ -1,0 +1,12 @@
+.filled {
+    outline: none;
+    background: none;
+    border: none;
+}
+
+.empty {
+    outline: none;
+    background: none;
+    border: none;
+    color: #cccccc;
+}
