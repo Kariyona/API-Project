@@ -4,6 +4,9 @@ import { thunkGetSpot } from "../../store/spots";
 import { useEffect } from "react";
 import { useParams } from "react-router-dom";
 import { thunkGetSpotReviews } from "../../store/reviews";
+import DeleteReviewModal from "../DeleteReviewModal";
+import OpenModalButton from "../OpenModalButton";
+import PostReviewModal from "../PostReviewModal";
 
 const SpotDetails = () => {
   let dispatch = useDispatch();
@@ -63,7 +66,18 @@ const SpotDetails = () => {
     }
   };
 
-  
+  reviewsArr.sort((a, b) => {
+    a = new Date(a.createdAt).getTime();
+    b = new Date(b.createdAt).getTime();
+    if (a < b) {
+      return 1;
+    }
+    if (a > b) {
+      return -1;
+    }
+    return 0;
+  });
+
   const handleReserveBtnClick = () => {
     alert("Feature Coming Soon...");
   };
@@ -94,7 +108,27 @@ const SpotDetails = () => {
           <div className="callout-info-box">
             <div className="price">{`$${spot.price} night`}</div>
 
-            <div className="star-reviews"></div>
+            <div className="star-reviews">
+              {" "}
+              <div className="review-header">
+                <div className="edit-star-and-rating">
+                  <i className="fa-solid fa-star" />
+                  <p>
+                     {spot.avgStarRating === null ? "New" :
+                  spot.avgStarRating % 1 === 0 ? spot.avgStarRating + ".0" : spot.avgStarRating}
+                  </p>
+                  <p className={spot.avgStarRating === null ? "hidden" : "shown"}>·</p>
+                  <p>
+                {spot.numReviews === 0 ? null :
+                <p>
+                {spot.numReviews}{""}
+                {spot.numReviews > 1 ? " Reviews" : " Review" }
+                </p>
+                }
+              </p>
+                </div>
+              </div>
+            </div>
 
             <div className="reserve-button">
               <button onClick={handleReserveBtnClick}>Reserve</button>
@@ -106,16 +140,27 @@ const SpotDetails = () => {
             <div className="edit-star-and-rating">
               <i className="fa-solid fa-star" />
               <p>
-                {spot.avgStarRating % 1 === 0
-                  ? spot.avgStarRating + ".0"
-                  : spot.avgStarRating}
+
+              {spot.avgStarRating === null ? "New" :
+                  spot.avgStarRating % 1 === 0 ? spot.avgStarRating + ".0" : spot.avgStarRating}
               </p>
-              <p>·</p>
+              <p className={spot.avgStarRating === null ? "hidden" : "shown"}>·</p>
               <p>
-                {spot.numReviews} {spot.numReviews > 1 ? "Reviews" : "Review"}
+                {spot.numReviews === 0 ? null :
+                <p>
+                {spot.numReviews}{""}
+                {spot.numReviews > 1 ? " Reviews" : " Review" }
+                </p>
+                }
+                {/* {spot.numReviews} {spot.numReviews > 1 ? "Reviews" : "Review"} */}
               </p>
             </div>
           </div>
+
+          <OpenModalButton
+            modalComponent={<PostReviewModal spotId={spotId} />}
+            buttonText="Post Your Review"
+          />
 
           <div className="reviews">
             {reviewsArr.map((review) => (
@@ -123,6 +168,12 @@ const SpotDetails = () => {
                 <p>{review.User.firstName}</p>
                 <p>{dateConverter(review.createdAt)}</p>
                 <p>{review.review}</p>
+                <OpenModalButton
+                  modalComponent={
+                    <DeleteReviewModal reviewId={review.id} spotId={spotId} />
+                  }
+                  buttonText="Delete"
+                />
               </div>
             ))}
           </div>

@@ -36,9 +36,8 @@ const SpotIndexItem = ({ spot }) => {
               <i className="fa-solid fa-star" />
 
               <p>
-                {spot.avgRating % 1 === 0
-                  ? spot.avgRating + ".0"
-                  : spot.avgRating}
+                {spot.avgRating === null ? "New" :
+                  spot.avgRating % 1 === 0 ? spot.avgRating + ".0" : spot.avgRating}
               </p>
             </div>
           </div>
