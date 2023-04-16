@@ -6,7 +6,7 @@ import "./Navigation.css";
 
 function Navigation({ isLoaded }) {
   const sessionUser = useSelector((state) => state.session.user);
-
+  // console.log("is LOADED?????: ", isLoaded);
   return (
     <div className="NavBar">
       <div className="leftNav">
