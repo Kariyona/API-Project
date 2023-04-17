@@ -71,7 +71,7 @@ function PostReviewModal({ spotId }) {
           <textarea
             onChange={(e) => setReview(e.target.value)}
             value={review}
-            placeholder="Leave your review here..."
+            placeholder="Leave your review here... must be at least 10 characters"
           />
 
           <div className="stars-container">
