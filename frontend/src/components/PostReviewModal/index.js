@@ -54,9 +54,10 @@ function PostReviewModal({ spotId }) {
   };
 
   return (
-    <>
+    <div className="main-container">
+    <div className="post-review-container">
       <div>
-        <h2>How was your stay?</h2>
+        <h2 className="title-align">How was your stay?</h2>
 
         {errors.rating && (
           <p className={isSubmitted ? "errors" : "hidden"}>{errors.rating}</p>
@@ -66,14 +67,14 @@ function PostReviewModal({ spotId }) {
           <p className={isSubmitted ? "errors" : "hidden"}>{errors.review}</p>
         )}
 
-        <form onSubmit={handleSubmit}>
+        <form onSubmit={handleSubmit} className="post-review-form">
           <textarea
             onChange={(e) => setReview(e.target.value)}
             value={review}
             placeholder="Leave your review here..."
           />
 
-          <div>
+          <div className="stars-container">
             <button
               type="button"
               className={stars >= 1 || rating >= 1 ? "filled" : "empty"}
@@ -81,7 +82,7 @@ function PostReviewModal({ spotId }) {
               onMouseLeave={() => setRating(0)}
               onClick={() => setStars(1)}
             >
-              <i className="fa-solid fa-star star"></i>
+              <i className="fa-solid fa-star star cursorPointer"></i>
             </button>
 
             <button
@@ -91,7 +92,7 @@ function PostReviewModal({ spotId }) {
               onMouseLeave={() => setRating(0)}
               onClick={() => setStars(2)}
             >
-              <i className="fa-solid fa-star star"></i>
+              <i className="fa-solid fa-star star cursorPointer"></i>
             </button>
 
             <button
@@ -101,7 +102,7 @@ function PostReviewModal({ spotId }) {
               onMouseLeave={() => setRating(0)}
               onClick={() => setStars(3)}
             >
-              <i className="fa-solid fa-star star"></i>
+              <i className="fa-solid fa-star star cursorPointer"></i>
             </button>
 
             <button
@@ -111,7 +112,7 @@ function PostReviewModal({ spotId }) {
               onMouseLeave={() => setRating(0)}
               onClick={() => setStars(4)}
             >
-              <i className="fa-solid fa-star star"></i>
+              <i className="fa-solid fa-star star cursorPointer"></i>
             </button>
 
             <button
@@ -121,18 +122,19 @@ function PostReviewModal({ spotId }) {
               onMouseLeave={() => setRating(0)}
               onClick={() => setStars(5)}
             >
-              <i className="fa-solid fa-star star"></i>
+              <i className="fa-solid fa-star star cursorPointer"></i>
             </button>
 
             <p>Stars</p>
           </div>
 
-          <button type="submit" disabled={Object.keys(errors).length > 0}>
+          <button type="submit" className={Object.keys(errors).length > 0 ? "hasErrors" : "noErrors" } disabled={Object.keys(errors).length > 0}>
             Submit Your Review
           </button>
         </form>
       </div>
-    </>
+    </div>
+    </div>
   );
 }
 

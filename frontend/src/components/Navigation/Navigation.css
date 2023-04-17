@@ -65,6 +65,7 @@
     color: teal;
     border: none;
     background-color: transparent;
+    cursor: pointer;
 }
 
 .signup-menu-item {
@@ -86,9 +87,14 @@
     border: none;
     background-color: transparent;
     margin: -5px;
+    cursor: pointer;
 }
 
 .logout-button {
     display: flex;
     justify-content: center;
+}
+
+.logout-btn {
+    cursor: pointer;
 }
