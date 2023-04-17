@@ -20,3 +20,75 @@
 .NavBar a {
     text-decoration: none;
 }
+
+.logo {
+    width: 100px;
+    height: 28px;
+}
+
+.icon {
+    width: 45px;
+    height: 45px;
+}
+
+.navlink {
+    display: flex;
+    align-items: center;
+}
+
+.profile-dropdown {
+    position: absolute;
+    top: 75px;
+    right: 11px;
+    border: 1px solid black;
+    padding: 5px;
+    padding-left: 10px;
+    width: 120px;
+    cursor: pointer;
+}
+
+.shown {
+    background-color: white;
+}
+
+
+.profile-menu-btn {
+    border-radius: 100px;
+    padding: 9px;
+    width: 80px;
+    /* height: 20px; */
+
+}
+
+.create-spot-btn {
+    /* border-radius: 10px; */
+    color: teal;
+    border: none;
+    background-color: transparent;
+}
+
+.signup-menu-item {
+    margin-bottom: 30px;
+}
+
+.hello-user {
+    margin: 0px;
+}
+
+.line-profile-dropdown {
+    border: solid 1px #666262;
+    margin: 6px 0px;
+    width: 100%;
+    box-sizing: border-box;
+}
+
+.manage-btn {
+    border: none;
+    background-color: transparent;
+    margin: -5px;
+}
+
+.logout-button {
+    display: flex;
+    justify-content: center;
+}
