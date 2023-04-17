@@ -17,16 +17,18 @@ function DeleteReviewModal({ reviewId, spotId }) {
   };
 
   return (
-    <>
+    <div className="confirm-delete-box">
       <h1>Confirm Delete</h1>
       <p>Are you sure you want to delete this review?</p>
+      <div className="button-class">
       <button className="delete" onClick={handleSubmit}>
         Yes (Delete Review)
       </button>
       <button className="no-delete" onClick={closeModal}>
         No (Keep Review)
       </button>
-    </>
+      </div>
+    </div>
   );
 }
 

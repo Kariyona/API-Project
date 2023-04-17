@@ -246,7 +246,7 @@ const Form = ({ spot, type }) => {
           <div className="form-line"></div>
           <div className="form-data">
             <h3>Describe your place to guests</h3>
-            <p>
+            <p className="bio-margin">
               Mention the best features of your space, any special amenities
               like fast wifi or parking, and what you love about the
               neighborhood.
@@ -266,7 +266,7 @@ const Form = ({ spot, type }) => {
           <div className="form-line"></div>
           <div className="form-data">
             <h3>Create a title for your spot</h3>
-            <p>
+            <p className="bio-margin">
               Catch guests' attention with a spot title that highlights what
               makes your place special.
             </p>
@@ -284,7 +284,7 @@ const Form = ({ spot, type }) => {
           )}
           <div className="form-line"></div>
           <h3>Set a base price for your spot</h3>
-          <p>
+          <p className="bio-margin">
             Competitive pricing can help your listing stand out and rank higher
             in search results.
           </p>
@@ -306,7 +306,7 @@ const Form = ({ spot, type }) => {
           {type === "CreateSpotForm" && (
             <div className="form-data">
               <h3>Liven up your spot with photos</h3>
-              <p>
+              <p className="bio-margin">
                 Submit a link to at least one photo to publish your spot. The
                 first spot will be the preview image.
               </p>

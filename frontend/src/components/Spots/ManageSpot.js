@@ -45,13 +45,16 @@ const ManageSpot = () => {
         <h2>Manage Spots</h2>
         <div className="spot-tile">
           {spotsObject.map((spot) => (
-            <div key={spot.id}>
+            <div className="manage-spot-buttons" key={spot.id}>
               <SpotIndexItem spot={spot} key={spot.id} />
-              <button onClick={()=>handleUpdate(spot.id)}>Update</button>
+              <div className="blah">
+              <button className="update-button-1"onClick={()=>handleUpdate(spot.id)}>Update</button>
               <OpenModalButton
+                giveClass="delete-button-1"
                 modalComponent={<DeleteSpotModal spotId={spot.id}/>}
                 buttonText="Delete"
               />
+              </div>
             </div>
           ))}
         </div>
