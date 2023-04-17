@@ -163,6 +163,7 @@
     color: white;
     border: black 1px solid;
     box-shadow: 2px 2px 2px black;
+    cursor: pointer;
 }
 
 .blah {

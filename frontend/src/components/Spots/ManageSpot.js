@@ -48,7 +48,7 @@ const ManageSpot = () => {
             <div className="manage-spot-buttons" key={spot.id}>
               <SpotIndexItem spot={spot} key={spot.id} />
               <div className="blah">
-              <button className="update-button-1"onClick={()=>handleUpdate(spot.id)}>Update</button>
+              <button className="update-button-1 cursorPointer"onClick={()=>handleUpdate(spot.id)}>Update</button>
               <OpenModalButton
                 giveClass="delete-button-1"
                 modalComponent={<DeleteSpotModal spotId={spot.id}/>}
