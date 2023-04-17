@@ -10,6 +10,7 @@
 
 .profile-menu-btn {
     cursor: pointer;
+    border: 1px solid #737171e4
 }
 
 .rightNav {
@@ -38,8 +39,8 @@
 
 .profile-dropdown {
     position: absolute;
-    top: 75px;
-    right: 11px;
+    top: 85px;
+    right: 8px;
     border: 1px solid black;
     padding: 5px;
     padding-left: 10px;
@@ -97,4 +98,12 @@
 
 .logout-btn {
     cursor: pointer;
+}
+
+.fa-solid {
+font-size: 18px;
+}
+
+.fa-user-circle {
+    font-size: 18px;
 }
