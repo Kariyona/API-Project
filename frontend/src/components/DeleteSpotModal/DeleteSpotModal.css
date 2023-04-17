@@ -3,6 +3,7 @@
     box-sizing: border-box;
     width: 390px;
     padding: 10px;
+    cursor: pointer;
 }
 
 .update {
@@ -15,6 +16,7 @@
 .no-delete {
     background-color: #CCCCCC;
     padding: 10px;
+    cursor: pointer;
 }
 
 .confirm-delete-box {
