@@ -3,7 +3,7 @@ import { useDispatch } from "react-redux";
 import { useState, useEffect } from "react";
 import { useHistory } from "react-router";
 import { thunkCreateSpot, thunkUpdateSpot } from "../../store/spots";
-
+import './form.css'
 const Form = ({ spot, type }) => {
   console.log("this is spot: ", spot);
   const history = useHistory();
@@ -176,6 +176,7 @@ const Form = ({ spot, type }) => {
 
   return (
     <div className="form-container">
+    <div className="form-baby">
       {type === "CreateSpotForm" ? (
         <h1>Create a New Spot</h1>
       ) : (
@@ -247,6 +248,7 @@ const Form = ({ spot, type }) => {
           value={description}
           onChange={(e) => setDescription(e.target.value)}
           placeholder="Please write at least 30 characters"
+          className="description-box"
           required
         />
       </div>
@@ -343,6 +345,7 @@ const Form = ({ spot, type }) => {
       ) : (
         <button onClick={handleClick}>Update Your Spot</button>
       )}
+    </div>
     </div>
   );
 };

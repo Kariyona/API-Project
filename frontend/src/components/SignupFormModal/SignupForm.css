@@ -1,0 +1,25 @@
+.signup-container {
+    width: 310px;
+}
+
+.h2-signup {
+    text-align: center;
+}
+
+.separator {
+    margin-top: 30px;
+}
+
+.separator-1 {
+    margin-top: 5px;
+}
+
+.signup-button {
+    margin-top: 15px;
+    margin-bottom: 10px;
+
+}
+
+.login-button {
+    cursor: pointer;
+}

@@ -1,0 +1,17 @@
+.form-container {
+    display: flex;
+    flex-direction: column;
+    width: 400px;
+}
+
+input {
+    border: 2px solid black;
+}
+
+textarea {
+    border: 2px solid black;
+}
+
+.description-box {
+    width: 400px;
+}

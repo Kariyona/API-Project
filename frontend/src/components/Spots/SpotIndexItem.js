@@ -10,7 +10,7 @@ const SpotIndexItem = ({ spot }) => {
   //     e.preventDefault();
   // dispatch(thunkGetSpot(spot.id))
   //
-  console.log("what does spot look like? ", spot);
+  // console.log("what does spot look like? ", spot);
 
   const handleSpotDetailsClick = () => {
     history.push(`/spots/${spot.id}`);

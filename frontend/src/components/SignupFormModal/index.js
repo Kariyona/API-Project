@@ -58,9 +58,10 @@ function SignupFormModal() {
   };
 
   return (
-    <>
-      <h1>Sign Up</h1>
+    <div className="signup-container">
+      <h2 className="h2-signup">Sign Up</h2>
       <form onSubmit={handleSubmit}>
+        <div className="separator">
         <label>
           Email
           <input
@@ -70,7 +71,9 @@ function SignupFormModal() {
             required
           />
         </label>
+        </div>
         {errors.email && <p>{errors.email}</p>}
+        <div className="separator-1">
         <label>
           Username
           <input
@@ -80,7 +83,9 @@ function SignupFormModal() {
             required
           />
         </label>
+        </div>
         {errors.username && <p>{errors.username}</p>}
+        <div className="separator">
         <label>
           First Name
           <input
@@ -90,7 +95,9 @@ function SignupFormModal() {
             required
           />
         </label>
+        </div>
         {errors.firstName && <p>{errors.firstName}</p>}
+        <div className="separator-1">
         <label>
           Last Name
           <input
@@ -100,7 +107,9 @@ function SignupFormModal() {
             required
           />
         </label>
+        </div>
         {errors.lastName && <p>{errors.lastName}</p>}
+        <div className="separator">
         <label>
           Password
           <input
@@ -110,7 +119,9 @@ function SignupFormModal() {
             required
           />
         </label>
+        </div>
         {errors.password && <p>{errors.password}</p>}
+        <div className="separator-1">
         <label>
           Confirm Password
           <input
@@ -120,12 +131,14 @@ function SignupFormModal() {
             required
           />
         </label>
+        </div>
         {errors.confirmPassword && <p>{errors.confirmPassword}</p>}
-        <button type="submit" disabled={disableBtn}>
+        <div className="signup-button"><button type="submit" className={`login-button ${disableBtn ? 'disabled' : ''}`} disabled={disableBtn}>
           Sign Up
         </button>
+        </div>
       </form>
-    </>
+    </div>
   );
 }
 

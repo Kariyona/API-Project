@@ -86,16 +86,17 @@ const SpotDetails = () => {
 
   console.log("REVIEWS ARRAYYYY: ", reviewsArr);
 
-  let userHasPostedReview;
+  let userReview;
   if (currentUser) {
-    userHasPostedReview = reviewsArr.find(
+    userReview = reviewsArr.find(
       (review) => review.userId === currentUser.id
     );
   }
 
-  // userHasPostedReview = Object.values(userHasPostedReview);
 
-  console.log("has posted a review: ", userHasPostedReview);
+  // userReview = Object.values(userReview);
+
+  // console.log("has posted a review: ", userReview);
 
   return (
     <>
@@ -108,10 +109,12 @@ const SpotDetails = () => {
         </div>
 
         <div className="spot-images">
-          {spot.SpotImages?.map((image) => (
-            <img key={image.id} src={image.url} alt={spot.name} />
+          {spot.SpotImages?.map((image, i) => (
+            <img className={`SpotImage${i}`} key={image.id} src={image.url} alt={spot.name} />
           ))}
         </div>
+
+
         <div className="host-and-review-container">
           <div className="host-and-description">
             <h2>
@@ -192,7 +195,7 @@ const SpotDetails = () => {
 
             {currentUser &&
               currentUser.id !== spot.ownerId &&
-              !userHasPostedReview && (
+              !userReview && (
                 <OpenModalButton
                   modalComponent={<PostReviewModal spotId={spotId} />}
                   buttonText="Post Your Review"
@@ -207,14 +210,16 @@ const SpotDetails = () => {
                 <p>{dateConverter(review.createdAt)}</p>
                 <p>{review.review}</p>
 
-                {userHasPostedReview ? (
+
+                {currentUser &&
+                currentUser.id === review.userId && (
                   <OpenModalButton
                     modalComponent={
                       <DeleteReviewModal reviewId={review.id} spotId={spotId} />
                     }
                     buttonText="Delete"
                   />
-                ) : null}
+                )}
               </div>
             ))}
           </div>
