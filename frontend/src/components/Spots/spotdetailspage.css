@@ -169,3 +169,7 @@
     display: flex;
     gap: 5px;
 }
+
+.errors {
+  color: red;
+}
