@@ -61,10 +61,34 @@
 }
 
 .create-spot-btn {
-    border-radius: 10px;
+    /* border-radius: 10px; */
+    color: teal;
+    border: none;
+    background-color: transparent;
 }
 
 .signup-menu-item {
     margin-bottom: 30px;
 }
 
+.hello-user {
+    margin: 0px;
+}
+
+.line-profile-dropdown {
+    border: solid 1px #666262;
+    margin: 6px 0px;
+    width: 100%;
+    box-sizing: border-box;
+}
+
+.manage-btn {
+    border: none;
+    background-color: transparent;
+    margin: -5px;
+}
+
+.logout-button {
+    display: flex;
+    justify-content: center;
+}
