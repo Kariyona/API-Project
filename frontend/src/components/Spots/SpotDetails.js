@@ -96,150 +96,159 @@ const SpotDetails = () => {
   // console.log("has posted a review: ", userReview);
 
   return (
-    <div className="spot-details-page">
-      <div className="spot-details-content">
-        <div className="spot-name-and-location-subtitle">
-          <h2>{spot.name}</h2>
-          <p>
-            {spot.city}, {spot.state}, {spot.country}
-          </p>
-        </div>
-
-        <div className="spot-images-grid">
-          {spot.SpotImages?.map((image, i) => (
-            <img
-              className={`SpotImage${i}`}
-              key={image.id}
-              src={image.url}
-              alt={spot.name}
-            />
-          ))}
-        </div>
-
-        <div className="host-and-review-container">
-          <div className="host-and-description">
-            <h2>
-              Hosted by {spot.Owner?.firstName} {spot.Owner?.lastName}
-            </h2>
-            <p>{spot.description}</p>
+    <div className="spot-details-container">
+      <div className="spot-details-page">
+        <div className="spot-details-content">
+          <div className="spot-name-and-location-subtitle">
+            <h2>{spot.name}</h2>
+            <p>
+              {spot.city}, {spot.state}, {spot.country}
+            </p>
           </div>
 
-          <div
-            className={
-              spot.avgStarRating === null
-                ? "new-callout-box"
-                : "callout-info-box"
-            }
-          >
-            <div className="sidebox-column">
-              <div
-                className={
-                  spot.avgStarRating === null ? "new-sidebox" : "sidebox"
-                }
-              >
-                <div className="price">{`$${spot.price} night`}</div>
+          <div className="spot-images-grid">
+            {spot.SpotImages?.map((image, i) => (
+              <img
+                className={`SpotImage${i}`}
+                key={image.id}
+                src={image.url}
+                alt={spot.name}
+              />
+            ))}
+          </div>
 
-                <div className="edit-star-and-rating">
-                  <i className="fa-solid fa-star" />
-                  <p>
-                    {spot.avgStarRating === null
-                      ? "New"
-                      : spot.avgStarRating % 1 === 0
-                      ? spot.avgStarRating + ".0"
-                      : spot.avgStarRating}
-                  </p>
-                  <p
-                    className={spot.avgStarRating === null ? "hidden" : "shown"}
+          <div className="host-and-review-container">
+            <div className="host-and-description">
+              <h2>
+                Hosted by {spot.Owner?.firstName} {spot.Owner?.lastName}
+              </h2>
+              <p>{spot.description}</p>
+            </div>
+
+            <div
+              className={
+                spot.avgStarRating === null
+                  ? "new-callout-box"
+                  : "callout-info-box"
+              }
+            >
+              <div className="sidebox-column">
+                <div
+                  className={
+                    spot.avgStarRating === null ? "new-sidebox" : "sidebox"
+                  }
+                >
+                  <div className="price">{`$${spot.price} night`}</div>
+
+                  <div className="edit-star-and-rating">
+                    <i className="fa-solid fa-star" />
+                    <p>
+                      {spot.avgStarRating === null
+                        ? "New"
+                        : spot.avgStarRating % 1 === 0
+                        ? spot.avgStarRating + ".0"
+                        : spot.avgStarRating}
+                    </p>
+                    <p
+                      className={
+                        spot.avgStarRating === null ? "hidden" : "shown"
+                      }
+                    >
+                      ·
+                    </p>
+                    <p>
+                      {spot.numReviews === 0 ? null : (
+                        <p>
+                          {spot.numReviews}
+                          {""}
+                          {spot.numReviews > 1 ? " reviews" : " review"}
+                        </p>
+                      )}
+                    </p>
+                  </div>
+                </div>
+                <div className="reserve-button">
+                  <button
+                    className="real-reserve-button"
+                    onClick={handleReserveBtnClick}
                   >
-                    ·
-                  </p>
-                  <p>
-                    {spot.numReviews === 0 ? null : (
-                      <p>
-                        {spot.numReviews}
-                        {""}
-                        {spot.numReviews > 1 ? " reviews" : " review"}
-                      </p>
-                    )}
-                  </p>
+                    Reserve
+                  </button>
                 </div>
               </div>
-              <div className="reserve-button">
-                <button
-                  className="real-reserve-button"
-                  onClick={handleReserveBtnClick}
-                >
-                  Reserve
-                </button>
-              </div>
             </div>
           </div>
         </div>
-      </div>
-      <div className="line-details"></div>
-      <div className="review-container">
-        <div className="review-header">
-          <div className="edit-star-and-rating">
-            <i className="fa-solid fa-star" />
-            <p>
-              {spot.avgStarRating === null
-                ? "New"
-                : spot.avgStarRating % 1 === 0
-                ? spot.avgStarRating + ".0"
-                : spot.avgStarRating}
-            </p>
-            <p className={spot.avgStarRating === null ? "hidden" : "shown"}>
-              ·
-            </p>
-            <p>
-              {spot.numReviews === 0 ? null : (
-                <p>
-                  {spot.numReviews}
-                  {""}
-                  {spot.numReviews > 1 ? " reviews" : " review"}
-                </p>
+        <div className="line-details"></div>
+        <div className="review-container">
+          <div className="review-header">
+            <div className="edit-star-and-rating">
+              <i className="fa-solid fa-star" />
+              <p>
+                {spot.avgStarRating === null
+                  ? "New"
+                  : spot.avgStarRating % 1 === 0
+                  ? spot.avgStarRating + ".0"
+                  : spot.avgStarRating}
+              </p>
+              <p className={spot.avgStarRating === null ? "hidden" : "shown"}>
+                ·
+              </p>
+              <p>
+                {spot.numReviews === 0 ? null : (
+                  <p>
+                    {spot.numReviews}
+                    {""}
+                    {spot.numReviews > 1 ? " reviews" : " review"}
+                  </p>
+                )}
+                {/* {spot.numReviews} {spot.numReviews > 1 ? "Reviews" : "Review"} */}
+              </p>
+            </div>
+
+            {currentUser &&
+              reviewsArr.length === 0 &&
+              currentUser.id !== spot.ownerId && (
+                <p className="no-review">{firstPersonToReview}</p>
               )}
-              {/* {spot.numReviews} {spot.numReviews > 1 ? "Reviews" : "Review"} */}
-            </p>
-          </div>
 
-          {currentUser &&
-            reviewsArr.length === 0 &&
-            currentUser.id !== spot.ownerId && (
-              <p className="no-review">{firstPersonToReview}</p>
-            )}
-
-          <div className="postreviewbtn">
-            {currentUser && currentUser.id !== spot.ownerId && !userReview && (
-              <OpenModalButton
-              giveClass="post-review-btn"
-                modalComponent={<PostReviewModal spotId={spotId} />}
-                buttonText="Post Your Review"
-              />
-            )}
-          </div>
-        </div>
-
-        <div className="reviews">
-          {reviewsArr.map((review) => (
-            <div key={review.id} className="review">
-              <p className="review-user">{review.User.firstName}</p>
-              <p className="review-date">{dateConverter(review.createdAt)}</p>
-              <p className="review-review">{review.review}</p>
-
-              <div className="delete-buttonn">
-                {currentUser && currentUser.id === review.userId && (
+            <div className="postreviewbtn">
+              {currentUser &&
+                currentUser.id !== spot.ownerId &&
+                !userReview && (
                   <OpenModalButton
-                    giveClass="delete-button-1"
-                    modalComponent={
-                      <DeleteReviewModal reviewId={review.id} spotId={spotId} />
-                    }
-                    buttonText="Delete"
+                    giveClass="post-review-btn"
+                    modalComponent={<PostReviewModal spotId={spotId} />}
+                    buttonText="Post Your Review"
                   />
                 )}
-              </div>
             </div>
-          ))}
+          </div>
+
+          <div className="reviews">
+            {reviewsArr.map((review) => (
+              <div key={review.id} className="review">
+                <p className="review-user">{review.User.firstName}</p>
+                <p className="review-date">{dateConverter(review.createdAt)}</p>
+                <p className="review-review">{review.review}</p>
+
+                <div className="delete-buttonn">
+                  {currentUser && currentUser.id === review.userId && (
+                    <OpenModalButton
+                      giveClass="delete-button-1"
+                      modalComponent={
+                        <DeleteReviewModal
+                          reviewId={review.id}
+                          spotId={spotId}
+                        />
+                      }
+                      buttonText="Delete"
+                    />
+                  )}
+                </div>
+              </div>
+            ))}
+          </div>
         </div>
       </div>
     </div>
