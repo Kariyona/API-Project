@@ -180,3 +180,7 @@
   justify-content: center;
   align-items: center;
 }
+
+.post-review-btn {
+  cursor: pointer;
+}
