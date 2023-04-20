@@ -17,6 +17,8 @@
 .spot-card {
     display: flex;
     flex-direction: column;
+    /* font-family: arial, sans-serif; */
+    font-family: arial, sans-serif;
 }
 
 .city-state-rating {
