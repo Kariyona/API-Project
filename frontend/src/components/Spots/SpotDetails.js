@@ -138,7 +138,7 @@ const SpotDetails = () => {
                     spot.avgStarRating === null ? "new-sidebox" : "sidebox"
                   }
                 >
-                  <div className="price">{`$${spot.price} night`}</div>
+                  <div className="price">{`$${spot.price} /per night`}</div>
 
                   <div className="edit-star-and-rating">
                     <i className="fa-solid fa-star" />
