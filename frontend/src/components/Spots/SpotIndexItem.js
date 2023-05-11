@@ -4,7 +4,7 @@ import "./Landing.css";
 import { useHistory } from "react-router-dom";
 
 const SpotIndexItem = ({ spot }) => {
-  let dispatch = useDispatch();
+  // let dispatch = useDispatch();
   const history = useHistory();
   // const handleDelete = (e) => {
   //     e.preventDefault();
