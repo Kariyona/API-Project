@@ -8,7 +8,7 @@ const SpotIndex = () => {
     const dispatch = useDispatch();
 
     const spotsObject = useSelector(state => state.spots)
-    const spotsObject2 = useSelector(state => state)
+    // const spotsObject2 = useSelector(state => state)
 
     const spots = Object.values(spotsObject || {})
 
