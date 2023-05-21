@@ -17,7 +17,7 @@ const ManageSpot = () => {
   console.log("spots object for manage spot: ", spotsObject);
 
   useEffect(() => {
-    // console.log("Calling thunkGetAllSpotsByUser");
+    console.log("Calling thunkGetAllSpotsByUser");
     dispatch(thunkGetAllSpotsByUser());
   }, [dispatch]);
 
