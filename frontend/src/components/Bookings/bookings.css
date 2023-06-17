@@ -1,0 +1,8 @@
+.book-now-button {
+    width: 100%;
+    cursor: pointer;
+    padding: 8px;
+    background-color: rgb(136, 158, 142);
+    margin-top: -5px;
+    color: white;
+  }

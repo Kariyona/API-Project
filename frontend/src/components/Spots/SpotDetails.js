@@ -1,12 +1,13 @@
 import { useDispatch, useSelector } from "react-redux";
 import "./spotdetailspage.css";
 import { thunkGetSpot } from "../../store/spots";
-import { useEffect } from "react";
+import React, { useState, useEffect } from "react";
 import { useParams } from "react-router-dom";
 import { thunkGetSpotReviews } from "../../store/reviews";
 import DeleteReviewModal from "../DeleteReviewModal";
 import OpenModalButton from "../OpenModalButton";
 import PostReviewModal from "../PostReviewModal";
+import Reservation from "../Bookings";
 
 const SpotDetails = () => {
   let dispatch = useDispatch();
@@ -17,6 +18,8 @@ const SpotDetails = () => {
   const currentUser = useSelector((state) => state.session.user);
   const reviewsObj = useSelector((state) => state.reviews);
   const reviewsArr = Object.values(reviewsObj || {});
+
+  const [showReservation, setShowReservation] = useState(false);
 
   useEffect(() => {
     dispatch(thunkGetSpot(spotId));
@@ -79,7 +82,8 @@ const SpotDetails = () => {
   });
 
   const handleReserveBtnClick = () => {
-    alert("Feature Coming Soon...");
+    // alert("Feature Coming Soon...");
+    setShowReservation((prevValue) => !prevValue)
   };
   // information for Review authorizations
   const firstPersonToReview = <p>Be the first to post a review!</p>;
@@ -172,8 +176,10 @@ const SpotDetails = () => {
                     className="real-reserve-button"
                     onClick={handleReserveBtnClick}
                   >
-                    Reserve
+                    Calendar
                   </button>
+                  {showReservation && <Reservation />}
+
                 </div>
               </div>
             </div>

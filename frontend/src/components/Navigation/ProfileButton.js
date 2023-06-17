@@ -65,6 +65,8 @@ function ProfileButton({ user }) {
               <div className="line-profile-dropdown" />
 
               <button className="manage-btn" onClick={HandleManageSpotsClick}>Manage Spots</button>
+              
+              <button className="manage-btn" onClick={HandleManageSpotsClick}>Manage Bookings</button>
 
               <div className="line-profile-dropdown" />
 <div className="logout-button">
