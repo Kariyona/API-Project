@@ -1,0 +1,41 @@
+.delete {
+    background-color: rgb(231, 116, 135);
+    box-sizing: border-box;
+    width: 390px;
+    padding: 10px;
+    cursor: pointer;
+}
+
+.update {
+    background-color: #CCCCCC;
+    box-sizing: border-box;
+    width: 390px;
+    padding: 5px;
+}
+
+.no-delete {
+    background-color: #CCCCCC;
+    padding: 10px;
+    cursor: pointer;
+}
+
+.confirm-delete-box {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
+.button-class {
+    display: flex;
+    flex-direction: column;
+    gap: 9px;
+}
+
+.confirm-delete-box > h1 {
+    margin-bottom: 0px;
+}
+
+.confirm-delete-box > p {
+    margin-top: 7px;
+}
