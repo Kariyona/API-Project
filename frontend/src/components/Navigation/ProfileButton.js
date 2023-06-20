@@ -48,6 +48,12 @@ function ProfileButton({ user }) {
     closeMenu();
   };
 
+  const HandleManageBookingsClick = (e, bookingId) => {
+    e.preventDefault();
+    history.push(`/bookings/current`);
+    closeMenu();
+  };
+
   const ulClassName = "profile-dropdown " + (showMenu ? "shown" : " hidden");
 
   return (
@@ -65,8 +71,8 @@ function ProfileButton({ user }) {
               <div className="line-profile-dropdown" />
 
               <button className="manage-btn" onClick={HandleManageSpotsClick}>Manage Spots</button>
-              
-              <button className="manage-btn" onClick={HandleManageSpotsClick}>Manage Bookings</button>
+
+              <button className="manage-btn" onClick={HandleManageBookingsClick}>Manage Bookings</button>
 
               <div className="line-profile-dropdown" />
 <div className="logout-button">

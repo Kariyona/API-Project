@@ -10,6 +10,7 @@ import SpotIndex from './components/Spots/index';
 import SpotDetails from "./components/Spots/SpotDetails";
 import UpdateSpot from './components/Spots/UpdateSpot';
 import CreateSpot from "./components/Spots/CreateSpot";
+import ManageBooking from "./components/Bookings/ManageBooking";
 
 function App() {
   const dispatch = useDispatch();
@@ -23,6 +24,7 @@ function App() {
       <Navigation isLoaded={isLoaded} />
       {isLoaded && (
         <Switch>
+          <Route exact path="/bookings/current" component={ManageBooking} />
           <Route exact path="/spots/current" component={ManageSpot}/>
           <Route exact path="/" component={SpotIndex} />
           <Route path="/spots/new" component={CreateSpot} />
