@@ -1,8 +1,9 @@
 import React, { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { useHistory } from "react-router-dom/cjs/react-router-dom.min";
-import { getAllBookingsByUser, getBookings } from "../../store/bookings";
-import SpotIndexItem from "../Spots/SpotIndexItem";
+import { getBookings } from "../../store/bookings";
+import DeleteBookingModal from "./DeleteBookingModal";
+import OpenModalButton from "../OpenModalButton";
 
 const ManageBooking = () => {
   const dispatch = useDispatch();
@@ -26,21 +27,27 @@ const ManageBooking = () => {
         {bookingsObject.map((booking) => (
           <div key={booking.id} className="booking-container">
             <div className="image-container">
-              <img
-                src={booking.Spot.previewImage}
-                alt="spot-preview"
-                className="spot-preview"
-              />
+              {booking.Spot && booking.Spot.previewImage && (
+                <img
+                  src={booking.Spot.previewImage}
+                  alt="spot-preview"
+                  className="spot-preview"
+                />
+              )}
             </div>
             <div className="text-container">
               <h3>{booking.Spot.name}</h3>
               <p>
                 {booking.Spot.city}, {booking.Spot.state}
               </p>
-              <p>${booking.Spot.price}</p>
               <p>Start Date: {booking.startDate}</p>
               <p>End Date: {booking.endDate}</p>
             </div>
+            <OpenModalButton
+              giveClass="delete-button-1"
+              modalComponent={<DeleteBookingModal bookingId={booking.id} />}
+              buttonText="Delete"
+            />
           </div>
         ))}
       </div>

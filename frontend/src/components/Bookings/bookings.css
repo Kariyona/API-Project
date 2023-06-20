@@ -13,3 +13,14 @@
   object-fit: cover;
   border-radius: 30px;
 }
+
+.booking-container {
+  display: flex;
+  align-items: center;
+  /* justify-content: center; */
+}
+
+.text-container {
+  /* flex-basis: 70%; */
+  padding-left: 20px;
+}

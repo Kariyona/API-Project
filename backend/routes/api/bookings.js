@@ -17,7 +17,10 @@ const router = express.Router();
 // DELETE A BOOKING!!
 router.delete("/:bookingId", [requireAuth], async (req, res) => {
   const { user } = req;
+  console.log("User ID:", user.id);
+
   const booking = await Booking.findByPk(req.params.bookingId);
+  console.log("Booking:", booking);
 
   if (!booking) {
     return res.status(404).json({
@@ -27,6 +30,8 @@ router.delete("/:bookingId", [requireAuth], async (req, res) => {
 
   const spot = await Spot.findByPk(booking.spotId);
   if (booking.userId !== user.id && spot.ownerId !== user.id) {
+    console.log("Forbidden: User ID and Owner ID do not match");
+
     return res.status(403).json({
       message: "Forbidden",
     });
