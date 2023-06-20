@@ -37,14 +37,19 @@ router.delete("/:bookingId", [requireAuth], async (req, res) => {
     });
   }
 
-  const today = new Date();
-  const startDate = new Date(booking.startDate);
-  if (startDate < today) {
-    return res.status(403).json({
-      message: "Bookings that have been started can't be deleted",
-    });
-  }
+  const today = new Date().getTime();
+  // console.log("this is new date dot get time: ", today)
+  const startDate = new Date(booking.startDate).getTime();
+  // console.log('this is start date dot get time: ', startDate)
+  // if (startDate < today ) {
+  //   return res.status(403).json({
+  //     message: "Bookings that have been started can't be deleted",
+  //   });
+  // }
+  const endDate = newDate(booking.endDate).getTime()
+  if (startDate < today && endDate < today) {
 
+  }
   await booking.destroy();
   return res.json({ message: "Successfully deleted" });
 });
