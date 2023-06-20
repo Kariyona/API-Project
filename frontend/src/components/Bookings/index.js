@@ -47,6 +47,8 @@ const Reservation = () => {
         value={value}
         selectRange={true}
         minDate={currentDate}
+        goToRangeStartOnSelect={false}
+        locale="en-EN"
       />
     </div>
   );

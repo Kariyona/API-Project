@@ -66,8 +66,10 @@ router.post("/:spotId/bookings", [requireAuth], async (req, res) => {
   }
 
   const startDate = new Date(req.body.startDate);
-  const endDate = new Date(req.body.endDate);
-
+  // console.log("end date: ", req.body.endDate);
+  let endDate = new Date(req.body.endDate);
+  // endDate = endDate.getDate()-1
+  // console.log("dateee: ", endDate)
   if (endDate <= startDate) {
     return res.status(400).json({
       message: "Bad Request",
@@ -409,7 +411,7 @@ router.post("/:spotId/images", [requireAuth], async (req, res) => {
 
   const { url, preview } = req.body;
   // instance of the model
-  
+
   console.log("=========url from spots route api==================: ", url);
 
   const addImage = await SpotImage.create({
