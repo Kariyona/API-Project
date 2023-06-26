@@ -67,7 +67,11 @@ router.post("/:spotId/bookings", [requireAuth], async (req, res) => {
 
   const startDate = new Date(req.body.startDate);
   // console.log("end date: ", req.body.endDate);
-  let endDate = new Date(req.body.endDate);
+  const endDate = new Date(req.body.endDate);
+
+  // set the end date to the end of the day
+  endDate.setHours(23, 59, 59, 999)
+
   // endDate = endDate.getDate()-1
   // console.log("dateee: ", endDate)
   if (endDate <= startDate) {
