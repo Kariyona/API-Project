@@ -19,6 +19,15 @@ const Reservation = () => {
   console.log("this is start date", value[0]);
   console.log("this is end date", value[1]);
 
+  // const isDayDisabled = (date) => {
+  //   const bookings = []
+  //   return bookings.some((booking) => {
+  //     const startDate = new Date(booking.startDate)
+  //     const endDate = new Date(booking.endDate)
+  //     return date >= startDate && date <= endDate
+  //   })
+  // }
+
   const handleReservation = async () => {
     // Adjust the time zone offset
     const startDate = new Date(
@@ -27,13 +36,16 @@ const Reservation = () => {
     const endDate = new Date(
       value[1].getTime() - value[1].getTimezoneOffset() * 60000
     );
-
+    console.log("start date original: ", startDate)
+    console.log("end date original: ", endDate)
     const newBooking = {
       spot: spotId,
       userId: userId,
       startDate: startDate.toISOString(),
       endDate: endDate.toISOString(),
     };
+    console.log("new booking dot start date: ", newBooking.startDate)
+    console.log("new booking dot end date: ", newBooking.endDate)
     const booking = await dispatch(createBooking(spotId, newBooking));
     console.log("this is booking:", booking);
   };
@@ -60,6 +72,7 @@ const Reservation = () => {
         minDate={currentDate}
         goToRangeStartOnSelect={false}
         locale="en-EN"
+        tileDisabled={isDayDisabled}
       />
     </div>
   );
