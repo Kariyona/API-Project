@@ -61,6 +61,7 @@ export const getBookings = () => async (dispatch) => {
     return booking;
   }
 };
+
 const bookingsReducer = (state = {}, action) => {
   switch (action.type) {
     case CREATE_BOOKING: {
