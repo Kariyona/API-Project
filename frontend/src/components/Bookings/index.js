@@ -72,7 +72,7 @@ const Reservation = () => {
         minDate={currentDate}
         goToRangeStartOnSelect={false}
         locale="en-EN"
-        tileDisabled={isDayDisabled}
+        // tileDisabled={isDayDisabled}
       />
     </div>
   );
