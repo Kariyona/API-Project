@@ -41,16 +41,17 @@ const ManageBooking = () => {
                 {booking.Spot && (
                   <>
                     <h3>{booking.Spot.name}</h3>
-                    <p>
+                    <p className="text-location">
                       {booking.Spot.city}, {booking.Spot.state}
                     </p>
                   </>
                 )}
-                <p>Start Date: {booking.startDate}</p>
-                <p>End Date: {booking.endDate}</p>
+                <p className="text-container-date"><span style={{ fontWeight: 'bold' }}>Start Date:</span> {booking.startDate.substring(0, 10)}</p>
+                <p className="text-container-date"> <span style={{ fontWeight: 'bold' }}>End Date:</span> {booking.endDate.substring(0, 10)}</p>
               </div>
-              <OpenModalButton
-                giveClass="delete-button-1"
+              <div className="buttons-group">
+              <h3></h3><OpenModalButton
+                giveClass="edit-button-1"
                 // modalComponent={<EditBookingModal bookingId={booking.id} />}
                 modalComponent={<EditBookingModal spotId={booking.spotId} bookingId={booking.id} booking={booking}/>}
                 buttonText="Edit"
@@ -60,6 +61,7 @@ const ManageBooking = () => {
                 modalComponent={<DeleteBookingModal bookingId={booking.id} />}
                 buttonText="Delete"
               />
+              </div>
             </div>
           ))}
       </div>
