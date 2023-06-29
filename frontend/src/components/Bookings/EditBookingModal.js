@@ -1,6 +1,6 @@
+import "react-calendar/dist/Calendar.css";
 import { useEffect, useState } from "react";
 import Calendar from "react-calendar";
-import "react-calendar/dist/Calendar.css";
 import { useDispatch } from "react-redux";
 import { useModal } from "../../context/Modal";
 import { editBooking } from "../../store/bookings";
@@ -10,8 +10,7 @@ const EditBookingModal = ({ spotId, bookingId, booking }) => {
   const [value, onChange] = useState([new Date(), new Date()]);
   const currentDate = new Date();
   const dispatch = useDispatch();
-  const { closeModal } = useModal()
-
+  const { closeModal } = useModal();
 
   useEffect(() => {
     const fetchBookings = async () => {
@@ -57,7 +56,7 @@ const EditBookingModal = ({ spotId, bookingId, booking }) => {
     if (!bookings) return;
 
     const bookingObject = bookings.reduce((acc, booking) => {
-        console.log("booking dot id and bookingId:", booking.id, bookingId)
+      console.log("booking dot id and bookingId:", booking.id, bookingId);
       if (booking.id !== bookingId) {
         acc[booking.id] = booking;
         return acc;
@@ -81,7 +80,9 @@ const EditBookingModal = ({ spotId, bookingId, booking }) => {
     return false; // Enable the day if it's not within any booked date range
   };
 
-
+  const handleGoBack = () => {
+    closeModal();
+  };
 
   return (
     <div>
@@ -95,6 +96,7 @@ const EditBookingModal = ({ spotId, bookingId, booking }) => {
         goToRangeStartOnSelect={false}
         locale="en-EN"
       />
+      <button onClick={handleGoBack}>Go Back</button>
       <button onClick={handleEdit}>Update</button>
     </div>
   );
