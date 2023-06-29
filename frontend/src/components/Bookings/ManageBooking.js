@@ -20,6 +20,13 @@ const ManageBooking = () => {
     dispatch(getBookings());
   }, [dispatch]);
 
+  const currentDate = new Date();
+
+  const hasDateExpired = (dateString) => {
+    const date = new Date(dateString);
+    return date < currentDate;
+  };
+
   return (
     <>
       <div>
@@ -46,21 +53,48 @@ const ManageBooking = () => {
                     </p>
                   </>
                 )}
-                <p className="text-container-date"><span style={{ fontWeight: 'bold' }}>Start Date:</span> {booking.startDate.substring(0, 10)}</p>
-                <p className="text-container-date"> <span style={{ fontWeight: 'bold' }}>End Date:</span> {booking.endDate.substring(0, 10)}</p>
+                <p
+                  className={`text-container-date ${
+                    hasDateExpired(booking.endDate) ? "date-passed" : ""
+                  }`}
+                >
+                  <span style={{ fontWeight: "bold" }}>Start Date:</span>{" "}
+                  <span
+                    className={
+                      hasDateExpired(booking.endDate) ? "date-passed" : ""
+                    }
+                  >
+                    {booking.startDate.substring(0, 10)}
+                  </span>
+                </p>
+                <p
+                  className={`text-container-date ${
+                    hasDateExpired(booking.endDate) ? "date-passed" : ""
+                  }`}
+                >
+                  <span style={{ fontWeight: "bold" }}>End Date:</span>{" "}
+                  {booking.endDate.substring(0, 10)}
+                </p>
               </div>
               <div className="buttons-group">
-              <h3></h3><OpenModalButton
-                giveClass="edit-button-1"
-                // modalComponent={<EditBookingModal bookingId={booking.id} />}
-                modalComponent={<EditBookingModal spotId={booking.spotId} bookingId={booking.id} booking={booking}/>}
-                buttonText="Edit"
-              />
-              <OpenModalButton
-                giveClass="delete-button-1"
-                modalComponent={<DeleteBookingModal bookingId={booking.id} />}
-                buttonText="Delete"
-              />
+                <h3></h3>
+                <OpenModalButton
+                  giveClass="edit-button-1"
+                  // modalComponent={<EditBookingModal bookingId={booking.id} />}
+                  modalComponent={
+                    <EditBookingModal
+                      spotId={booking.spotId}
+                      bookingId={booking.id}
+                      booking={booking}
+                    />
+                  }
+                  buttonText="Edit"
+                />
+                <OpenModalButton
+                  giveClass="delete-button-1"
+                  modalComponent={<DeleteBookingModal bookingId={booking.id} />}
+                  buttonText="Delete"
+                />
               </div>
             </div>
           ))}

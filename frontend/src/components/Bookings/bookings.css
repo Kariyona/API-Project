@@ -34,7 +34,7 @@
   flex-direction: column;
 }
 .edit-button-1 {
-  background-color: rgb(218, 184, 96);
+  background-color: rgb(223, 132, 132);
   color: white;
   border: black 1px solid;
   box-shadow: 2px 2px 2px black;
@@ -61,4 +61,8 @@
 .text-container-date {
   color: rgb(85, 179, 158);
   /* font-weight: bold; */
+}
+
+.date-passed {
+  color: red;
 }
