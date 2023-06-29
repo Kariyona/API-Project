@@ -128,7 +128,8 @@ const bookingsReducer = (state = {}, action) => {
       return bookings;
     }
     case UPDATE_BOOKING: {
-      return { ...state, [action.booking.id]: action.booking}
+      const updatedBooking = action.booking;
+      return { ...state, [updatedBooking.id]: updatedBooking };
     }
     default:
       return state;
