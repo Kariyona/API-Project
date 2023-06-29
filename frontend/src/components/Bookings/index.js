@@ -1,32 +1,38 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import Calendar from "react-calendar";
 import "react-calendar/dist/Calendar.css";
 import "./bookings.css";
 import { useDispatch, useSelector } from "react-redux";
-import { createBooking } from "../../store/bookings";
+import { createBooking, getAllBookingsBySpotId } from "../../store/bookings";
 import { useParams } from "react-router-dom/cjs/react-router-dom.min";
 
 
 const Reservation = () => {
   const dispatch = useDispatch();
-  const [value, onChange] = useState([new Date(), new Date()]);
+  const [value, onChange] = useState([new Date(), new Date()])
 
   const currentDate = new Date();
   const { spotId } = useParams();
-  const userId = useSelector((state) => state.session.user.id);
+  const [userId, bookings] = useSelector((state) => [state.session.user.id, state.bookings]);
 
-  console.log("user id: ", userId);
-  console.log("this is start date", value[0]);
-  console.log("this is end date", value[1]);
+  // console.log("this is bookings: ", bookings)
+  // console.log("user id: ", userId);
+  // console.log("this is start date", value[0]);
+  // console.log("this is end date", value[1]);
 
-  // const isDayDisabled = (date) => {
-  //   const bookings = []
-  //   return bookings.some((booking) => {
-  //     const startDate = new Date(booking.startDate)
-  //     const endDate = new Date(booking.endDate)
-  //     return date >= startDate && date <= endDate
-  //   })
-  // }
+  const isDayDisabled = ({ date }) => {
+    // console.log("what is the date: ", date)
+    const currentDate = new Date(date.getFullYear(), date.getMonth(), date.getDate());
+    console.log("lets console log bookings on line 26: ", bookings)
+    for (const key in bookings) {
+      const bookingStartDate = new Date(bookings[key].startDate);
+      const bookingEndDate = new Date(bookings[key].endDate);
+      if (currentDate >= bookingStartDate && currentDate <= bookingEndDate) {
+        return true; // Disable the day if it's within a booked date range
+      }
+    }
+    return false; // Enable the day if it's not within any booked date range
+  };
 
   const handleReservation = async () => {
     // Adjust the time zone offset
@@ -72,7 +78,7 @@ const Reservation = () => {
         minDate={currentDate}
         goToRangeStartOnSelect={false}
         locale="en-EN"
-        // tileDisabled={isDayDisabled}
+        tileDisabled={isDayDisabled}
       />
     </div>
   );

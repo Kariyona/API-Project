@@ -138,14 +138,8 @@ router.get("/:spotId/bookings", [requireAuth], async (req, res) => {
   for (let i = 0; i < bookings.length; i++) {
     const booking = bookings[i];
 
-    // console.log("booking.startDate raw:", booking.startDate);
-    // console.log("booking.endDate raw:", booking.endDate);
-
     const startDate = new Date(booking.startDate);
     const endDate = new Date(booking.endDate);
-
-    // console.log("booking.startDate raw:", startDate);
-    // console.log("booking.endDate raw:", endDate);
 
     let bookingResponse;
 
@@ -162,6 +156,8 @@ router.get("/:spotId/bookings", [requireAuth], async (req, res) => {
       };
     } else {
       bookingResponse = {
+        id: booking.id,
+        userId: booking.User.id,
         spotId: booking.spotId,
         startDate: startDate,
         endDate: endDate,
