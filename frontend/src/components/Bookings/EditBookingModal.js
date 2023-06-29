@@ -10,8 +10,7 @@ const EditBookingModal = ({ spotId, bookingId, booking }) => {
   const [value, onChange] = useState([new Date(), new Date()]);
   const currentDate = new Date();
   const dispatch = useDispatch();
-  const { closeModal } = useModal()
-
+  const { closeModal } = useModal();
 
   useEffect(() => {
     const fetchBookings = async () => {
@@ -57,7 +56,7 @@ const EditBookingModal = ({ spotId, bookingId, booking }) => {
     if (!bookings) return;
 
     const bookingObject = bookings.reduce((acc, booking) => {
-        console.log("booking dot id and bookingId:", booking.id, bookingId)
+      console.log("booking dot id and bookingId:", booking.id, bookingId);
       if (booking.id !== bookingId) {
         acc[booking.id] = booking;
         return acc;
@@ -80,8 +79,6 @@ const EditBookingModal = ({ spotId, bookingId, booking }) => {
 
     return false; // Enable the day if it's not within any booked date range
   };
-
-
 
   return (
     <div>
