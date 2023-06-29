@@ -8,6 +8,7 @@ import DeleteReviewModal from "../DeleteReviewModal";
 import OpenModalButton from "../OpenModalButton";
 import PostReviewModal from "../PostReviewModal";
 import Reservation from "../Bookings";
+import { getAllBookingsBySpotId } from "../../store/bookings";
 
 const SpotDetails = () => {
   let dispatch = useDispatch();
@@ -24,6 +25,7 @@ const SpotDetails = () => {
   useEffect(() => {
     dispatch(thunkGetSpot(spotId));
     dispatch(thunkGetSpotReviews(spotId));
+    dispatch(getAllBookingsBySpotId(spotId))
   }, [dispatch, spotId]);
 
   if (!spot) return null;
