@@ -29,9 +29,23 @@ const EditBookingModal = ({ spotId, bookingId, booking }) => {
   }, [spotId]);
 
   const handleEdit = async () => {
-    dispatch(editBooking(booking))
-    closeModal()
-  }
+    // Adjust the time zone offset
+    const startDate = new Date(
+      value[0].getTime() - value[0].getTimezoneOffset() * 60000
+    );
+    const endDate = new Date(
+      value[1].getTime() - value[1].getTimezoneOffset() * 60000
+    );
+
+    const updatedBooking = {
+      ...booking,
+      startDate: startDate.toISOString(),
+      endDate: endDate.toISOString(),
+    };
+
+    await dispatch(editBooking(updatedBooking, bookingId));
+    closeModal();
+  };
 
   const isDayDisabled = ({ date }) => {
     const currentDate = new Date(
