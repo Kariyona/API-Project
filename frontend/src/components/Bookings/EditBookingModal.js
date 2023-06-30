@@ -73,11 +73,11 @@ const EditBookingModal = ({ spotId, bookingId, booking }) => {
       console.log("the key of the booking: ", bookings[key]);
 
       if (currentDate >= bookingStartDate && currentDate <= bookingEndDate) {
-        return true; // Disable the day if it's within a booked date range
+        return true; // Disable the day
       }
     }
 
-    return false; // Enable the day if it's not within any booked date range
+    return false; // Enable the day
   };
 
   const handleGoBack = () => {

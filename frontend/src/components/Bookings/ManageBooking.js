@@ -58,7 +58,8 @@ const ManageBooking = () => {
                     hasDateExpired(booking.endDate) ? "date-passed" : ""
                   }`}
                 >
-                  <span style={{ fontWeight: "bold" }}>Start Date:</span>{" "}
+                  {/* <span style={{ fontWeight: "bold" }}> */}
+                    <div className="start-end-date-bold">Start Date:</div>{" "}
                   <span
                     className={
                       hasDateExpired(booking.endDate) ? "date-passed" : ""
@@ -72,7 +73,8 @@ const ManageBooking = () => {
                     hasDateExpired(booking.endDate) ? "date-passed" : ""
                   }`}
                 >
-                  <span style={{ fontWeight: "bold" }}>End Date:</span>{" "}
+                  {/* <span style={{ fontWeight: "bold" }}> */}
+                    <div className="start-end-date-bold">End Date:</div>{" "}
                   {booking.endDate.substring(0, 10)}
                 </p>
               </div>
