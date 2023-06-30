@@ -20,7 +20,7 @@ const ManageBooking = () => {
     dispatch(getBookings());
   }, [dispatch]);
 
-  const currentDate = new Date();
+  // const currentDate = new Date();
 
   const hasDateExpired = (dateString) => {
     const date = new Date(dateString);
