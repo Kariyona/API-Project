@@ -42,10 +42,6 @@
   cursor: pointer;
 }
 
-/* .buttons-group {
-  align-items: flex-start;
-} */
-
 .success-message-container {
   display: flex;
   flex-direction: column;
@@ -65,4 +61,10 @@
 
 .date-passed {
   color: red;
+}
+
+.start-end-date-bold {
+  font-weight: bold;
+  /* display: flex; */
+  /* flex-direction: column; */
 }
