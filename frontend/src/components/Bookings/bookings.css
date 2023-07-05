@@ -42,10 +42,6 @@
   cursor: pointer;
 }
 
-/* .buttons-group {
-  align-items: flex-start;
-} */
-
 .success-message-container {
   display: flex;
   flex-direction: column;
