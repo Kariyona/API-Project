@@ -11,6 +11,7 @@ import SpotDetails from "./components/Spots/SpotDetails";
 import UpdateSpot from './components/Spots/UpdateSpot';
 import CreateSpot from "./components/Spots/CreateSpot";
 import ManageBooking from "./components/Bookings/ManageBooking";
+import Footer from "./components/Footer";
 
 function App() {
   const dispatch = useDispatch();
@@ -32,6 +33,7 @@ function App() {
           <Route exact path="/spots/:spotId" component={SpotDetails} />
         </Switch>
       )}
+      <Footer />
     </>
   );
 }
