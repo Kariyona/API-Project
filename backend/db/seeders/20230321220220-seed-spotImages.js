@@ -248,12 +248,12 @@ module.exports = {
         },
         {
           spotId: 10,
-          url: "https://a0.muscache.com/im/pictures/miso/Hosting-50712921/original/98a2dde7-1cdf-4a84-9313-d0fc45edb76f.jpeg",
+          url: "https://i.imgur.com/IES3FCb.jpg",
           preview: true,
         },
         {
           spotId: 10,
-          url: "https://i.imgur.com/IES3FCb.jpg",
+          url: "https://a0.muscache.com/im/pictures/miso/Hosting-50712921/original/94b7cb0d-5424-4152-b09b-2a267e79a7e4.jpeg",
           preview: false,
         },
         {
