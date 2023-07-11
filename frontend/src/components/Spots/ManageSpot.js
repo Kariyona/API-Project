@@ -14,17 +14,14 @@ const ManageSpot = () => {
 
   const spots = useSelector((state) => state.spots);
   const spotsObject = Object.values(spots || {});
-  console.log("spots object for manage spot: ", spotsObject);
 
   useEffect(() => {
-    console.log("Calling thunkGetAllSpotsByUser");
     dispatch(thunkGetAllSpotsByUser());
   }, [dispatch]);
 
   if (!spots) return null;
 
   const handleUpdate = async (spotId) => {
-    console.log("spotId=======", spotId)
     history.push(`/spots/${spotId}/edit`)
   }
 

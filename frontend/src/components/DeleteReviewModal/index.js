@@ -10,7 +10,6 @@ function DeleteReviewModal({ reviewId, spotId }) {
 
   const handleSubmit = async () => {
     await dispatch(thunkDeleteReview(reviewId));
-    // console.log("deleted review");
     await dispatch(thunkGetSpotReviews(spotId));
     await dispatch(thunkGetSpot(spotId));
     closeModal();

@@ -50,7 +50,6 @@ function PostReviewModal({ spotId }) {
             await dispatch(thunkGetSpot(spotId))
         }
     }
-    // console.log("STAAARSSS: ", stars);
   };
 
   return (

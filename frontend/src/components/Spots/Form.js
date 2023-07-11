@@ -5,7 +5,6 @@ import { useHistory } from "react-router";
 import { thunkCreateSpot, thunkUpdateSpot } from "../../store/spots";
 import "./form.css";
 const Form = ({ spot, type }) => {
-  console.log("this is spot: ", spot);
   const history = useHistory();
   let dispatch = useDispatch();
   const [country, setCountry] = useState(spot.country);
@@ -94,15 +93,12 @@ const Form = ({ spot, type }) => {
   }, [country, address, city, state, description, name, price, previewImg]);
 
   const handleClick = async (e) => {
-    // console.log("handle click submit function running");
     e.preventDefault();
     setIsSubmitted(true);
 
     const errorArr = Object.values(validationErrors);
-    // console.log("this is errors array in handle click: ", errorArr);
 
     if (errorArr.length > 0) {
-      // console.log("if errors array.lenth === 0 running");
       return;
     } else {
       const data = {
@@ -166,7 +162,6 @@ const Form = ({ spot, type }) => {
         }
       } else if (type === "UpdateSpotForm") {
         const updatedSpot = await dispatch(thunkUpdateSpot(data, spot.id));
-        console.log("blahblah");
         history.push(`/spots/${updatedSpot.id}`);
         // const updatedSpot = await dispatch(thunkUpdateSpot(data)).then(()=>{
         // })
