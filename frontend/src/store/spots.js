@@ -91,6 +91,7 @@ export const thunkUpdateSpot = (spot, spotId) => async (dispatch) => {
   }
 };
 
+
 export const thunkDeleteSpot = (spotId) => async (dispatch) => {
   const response = await csrfFetch(`/api/spots/${spotId}`, {
     method: "DELETE",
@@ -133,7 +134,7 @@ export const thunkCreateSpot = (newSpot, imageArr) => async (dispatch) => {
         body: JSON.stringify(imageArr[i]),
       });
       const createdImage = await imageRes.json();
-      
+
       finalImageArr.push(imageRes);
     }
     spot.SpotImages = finalImageArr;
