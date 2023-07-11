@@ -73,28 +73,7 @@ export const thunkGetSpot = (spotId) => async (dispatch) => {
   }
 };
 
-// OLD THUNK UPDATE SPOT
-// export const thunkUpdateSpot = (spot, spotId) => async (dispatch) => {
-//   const response = await csrfFetch(`/api/spots/${spotId}`, {
-//     method: "PUT",
-//     headers: {
-//       "Content-Type": "application/json",
-//     },
-//     body: JSON.stringify(spot),
-//   });
-//   if (!response.ok) {
-//     const errors = await response.json();
-//     return errors;
-//   } else {
-//     const spot = await response.json();
-//     dispatch(actionUpdateSpot(spot));
-//     return spot;
-//   }
-// };
-
-
-// NEW THUNK UPDATE SPOT
-export const thunkUpdateSpot = (spot, spotId, imageArr, oldImageUrls) => async (dispatch) => {
+export const thunkUpdateSpot = (spot, spotId) => async (dispatch) => {
   const response = await csrfFetch(`/api/spots/${spotId}`, {
     method: "PUT",
     headers: {
@@ -107,31 +86,11 @@ export const thunkUpdateSpot = (spot, spotId, imageArr, oldImageUrls) => async (
     return errors;
   } else {
     const spot = await response.json();
-
-    let finalImageArr = [];
-    console.log(imageArr)
-
-    for (let i = 0; i < imageArr.length; i++) {
-      const deletedImage = await csrfFetch(`/api/spot-images/${oldImageUrls[i].id}`, {
-        method: "DELETE"
-      });
-      // Add AWS delete from S3 Bucket here
-
-      const imageRes = await csrfFetch(`/api/spots/${spot.id}/images`, {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-        },
-        body: JSON.stringify(imageArr[i]),
-      });
-      const createdImage = await imageRes.json();
-      finalImageArr.push(imageRes);
-    }
-    spot.SpotImages = finalImageArr;
     dispatch(actionUpdateSpot(spot));
     return spot;
   }
 };
+
 
 export const thunkDeleteSpot = (spotId) => async (dispatch) => {
   const response = await csrfFetch(`/api/spots/${spotId}`, {
