@@ -17,10 +17,8 @@ const router = express.Router();
 // DELETE A BOOKING!!
 router.delete("/:bookingId", [requireAuth], async (req, res) => {
   const { user } = req;
-  console.log("User ID:", user.id);
 
   const booking = await Booking.findByPk(req.params.bookingId);
-  console.log("Booking:", booking);
 
   if (!booking) {
     return res.status(404).json({

@@ -22,19 +22,14 @@ const Reservation = () => {
   ]);
   const history = useHistory();
 
-  // console.log("this is bookings: ", bookings)
-  // console.log("user id: ", userId);
-  // console.log("this is start date", value[0]);
-  // console.log("this is end date", value[1]);
+
 
   const isDayDisabled = ({ date }) => {
-    // console.log("what is the date: ", date)
     const currentDate = new Date(
       date.getFullYear(),
       date.getMonth(),
       date.getDate()
     );
-    console.log("lets console log bookings on line 26: ", bookings);
     for (const key in bookings) {
       const bookingStartDate = new Date(bookings[key].startDate);
       const bookingEndDate = new Date(bookings[key].endDate);
@@ -53,20 +48,16 @@ const Reservation = () => {
     const endDate = new Date(
       value[1].getTime() - value[1].getTimezoneOffset() * 60000
     );
-    console.log("start date original: ", startDate);
-    console.log("end date original: ", endDate);
+
     const newBooking = {
       spot: spotId,
       userId: userId,
       startDate: startDate.toISOString(),
       endDate: endDate.toISOString(),
     };
-    console.log("new booking dot start date: ", newBooking.startDate);
-    console.log("new booking dot end date: ", newBooking.endDate);
     const booking = await dispatch(createBooking(spotId, newBooking));
     setShowCalendar(false);
     // setSuccessMessage();
-    console.log("this is booking:", booking);
   };
 
 

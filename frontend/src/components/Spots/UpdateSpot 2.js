@@ -10,8 +10,6 @@ const UpdateSpot = () => {
 
   let spot;
   for (let i = 0; i < spotsArray.length; i++) {
-    // console.log("this is i: ", i);
-    // console.log("spots Array at i: ", spotsArray[i])
     if (spotsArray[i].id === parseInt(spotId)) {
       spot = spotsArray[i]
     }

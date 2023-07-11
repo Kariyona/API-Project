@@ -14,7 +14,6 @@ const ManageBooking = () => {
 
   const bookings = useSelector((state) => state.bookings);
   const bookingsObject = Object.values(bookings || {});
-  console.log("bookings object for manage bookings: ", bookingsObject);
 
   useEffect(() => {
     dispatch(getBookings());

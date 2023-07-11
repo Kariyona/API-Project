@@ -66,10 +66,8 @@ router.post("/:spotId/bookings", [requireAuth], async (req, res) => {
   }
 
   const startDate = new Date(req.body.startDate);
-  // console.log("end date: ", req.body.endDate);
   const endDate = new Date(req.body.endDate);
 
-  // console.log("dateee: ", endDate)
   if (endDate <= startDate) {
     return res.status(400).json({
       message: "Bad Request",
@@ -346,10 +344,8 @@ router.get("/:spotId", async (req, res) => {
     // const spotDetails = spot.toJSON();
     // spotDetails.Owner = spotDetails.User;
 
-    // console.log(spot);
     spot = spot.toJSON();
     spot.Owner = spot.User;
-    // console.log(spot);
 
     let sum = 0;
     let count = 0;
@@ -395,7 +391,6 @@ router.post("/:spotId/images", [requireAuth], async (req, res) => {
   const { user } = req;
   // const spot = await Spot.scope(['defaultScope']).findByPk(req.params.spotId);
   const spot = await Spot.findByPk(req.params.spotId);
-  // console.log(spot);
 
   if (!spot) {
     return res.status(404).json({ message: "Spot couldn't be found" });
@@ -408,7 +403,6 @@ router.post("/:spotId/images", [requireAuth], async (req, res) => {
   const { url, preview } = req.body;
   // instance of the model
 
-  console.log("=========url from spots route api==================: ", url);
 
   const addImage = await SpotImage.create({
     spotId: spot.id,
@@ -646,7 +640,6 @@ router.get("/", async (req, res) => {
     delete spot.SpotImages;
   });
 
-  // console.log(spots)
   res.status(200).json({
     ["Spots"]: spotsList,
     page,
@@ -704,7 +697,6 @@ module.exports = router;
 //   const spots = spotObjects[i];
 //   if (spots)
 // }
-// console.log(spotObjects);
 // res.json(spot)
 // let reviewData = await Review.findOne({
 //   where: {
@@ -717,4 +709,3 @@ module.exports = router;
 //   }
 // })
 // spot.avgRating = reviewData.toJSON().avgRating
-// console.log(spot.avgRating)

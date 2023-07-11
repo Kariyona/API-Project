@@ -50,28 +50,24 @@ export const actionCreateImage = (imagePayload) => ({
 
 /** Thunk Action Creators: */
 export const thunkGetAllSpots = () => async (dispatch) => {
-  console.log("thunkGetAllSpots start");
   const response = await csrfFetch(`/api/spots`);
   if (!response.ok) {
     const errors = await response.json();
     return errors;
   } else {
     const spots = await response.json();
-    console.log("thunkGetAllSpots dispatching actionGetAllSpots");
     dispatch(actionGetAllSpots(spots));
     return spots;
   }
 };
 
 export const thunkGetSpot = (spotId) => async (dispatch) => {
-  console.log("thunkGetSpot start");
   const response = await csrfFetch(`/api/spots/${spotId}`);
   if (!response.ok) {
     const errors = await response.json();
     return errors;
   } else {
     const spot = await response.json();
-    console.log("thunkGetSpot dispatching actionGetSpot");
     dispatch(actionGetSpot(spot));
     return spot;
   }
@@ -118,12 +114,9 @@ export const thunkCreateSpot = (newSpot, imageArr) => async (dispatch) => {
   });
   if (!response.ok) {
     const errors = await response.json();
-    console.log("response is not okay. this is errors: ", errors);
     return errors;
   } else {
     const spot = await response.json();
-
-    console.log("else this is created spot: ", spot);
     // loop through imageArr
 
     // i have a spot object
@@ -132,7 +125,6 @@ export const thunkCreateSpot = (newSpot, imageArr) => async (dispatch) => {
     // those objects have id and url and preview info
     let finalImageArr = [];
     for (let i = 0; i < imageArr.length; i++) {
-      console.log("this is image array at thunk at i: ", imageArr[i]);
       const imageRes = await csrfFetch(`/api/spots/${spot.id}/images`, {
         method: "POST",
         headers: {
@@ -141,32 +133,23 @@ export const thunkCreateSpot = (newSpot, imageArr) => async (dispatch) => {
         body: JSON.stringify(imageArr[i]),
       });
       const createdImage = await imageRes.json();
-      console.log(
-        "image creation for loop running, this is created image: ",
-        createdImage
-      );
+      
       finalImageArr.push(imageRes);
     }
     spot.SpotImages = finalImageArr;
-    console.log("final spot object before we put in reducer: ", spot);
     dispatch(actionCreateSpot(spot));
     return spot;
   }
 };
 
 export const thunkGetAllSpotsByUser = () => async (dispatch) => {
-  console.log("thunkGetAllSpotsByUser called");
   const response = await csrfFetch(`/api/spots/current`);
-  console.log("response", response);
   if (!response.ok) {
     const errors = await response.json();
-    console.log("Error occurred:", errors);
     return errors;
   } else {
     const spot = await response.json();
-    console.log("Dispatching actionGetAllSpotsByUser with payload:", spot);
     dispatch(actionGetAllSpotsByUser(spot));
-    console.log("dispatched actionGetAllSpotsByUser");
     return spot;
   }
 };

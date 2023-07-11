@@ -29,15 +29,12 @@ const SpotDetails = () => {
   }, [dispatch, spotId]);
 
   if (!spot) return null;
-  // console.log("spots: ", spot);
   // if (!spot.SpotImages) return null;
 
   const dateConverter = (reviewDate) => {
     //2023-04-14T15:04:11.000Z
     const uglyDate = reviewDate.slice(0, 10);
-    // console.log(uglyDate);
     const dateArray = uglyDate.split("-");
-    // console.log(dateArray);
     const month = dateArray[1];
     const year = dateArray[0];
     const months = [
@@ -60,7 +57,6 @@ const SpotDetails = () => {
       const currentMonth = months[i];
       if (month.charAt(0) === "0") {
         if (month.charAt(1) === i.toString()) {
-          // console.log(currentMonth);
           return `${currentMonth} ${year}`;
         }
       } else {
@@ -90,7 +86,6 @@ const SpotDetails = () => {
   // information for Review authorizations
   const firstPersonToReview = <p>Be the first to post a review!</p>;
 
-  console.log("REVIEWS ARRAYYYY: ", reviewsArr);
 
   let userReview;
   if (currentUser) {
@@ -99,7 +94,6 @@ const SpotDetails = () => {
 
   // userReview = Object.values(userReview);
 
-  // console.log("has posted a review: ", userReview);
 
   return (
     <div className="spot-details-container">
